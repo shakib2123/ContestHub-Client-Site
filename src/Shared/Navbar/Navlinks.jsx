@@ -7,8 +7,8 @@ const Navlinks = () => {
         <NavLink
           className={({ isActive }) =>
             isActive
-              ? "text-xl font-bold text-[#e63946] underline underline-offset-2  border border-[#e63946]"
-              : "text-gray-800 font-bold text-lg"
+              ? "md:text-xl font-bold text-[#e63946]  border border-[#e63946]"
+              : "text-gray-800 font-bold md:text-lg"
           }
           to="/"
         >
@@ -20,8 +20,8 @@ const Navlinks = () => {
         <NavLink
           className={({ isActive }) =>
             isActive
-              ? "text-xl font-bold text-[#e63946] underline underline-offset-2  border border-[#e63946]"
-              : "text-gray-800 font-bold text-lg"
+              ? "md:text-xl font-bold text-[#e63946] border border-[#e63946]"
+              : "text-gray-800 font-bold md:text-lg"
           }
           to="all-contest"
         >
