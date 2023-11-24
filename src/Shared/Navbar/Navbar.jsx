@@ -1,7 +1,7 @@
 import { MdOutlineMenu } from "react-icons/md";
 import Navlinks from "./Navlinks";
-import { Link } from "react-router-dom";
 import Logo from "../../components/Logo/Logo";
+import { Link } from "react-router-dom";
 const Navbar = () => {
   return (
     <div className="bg-[#a8dadc]">
@@ -9,7 +9,7 @@ const Navbar = () => {
         <div className="navbar-start">
           <div className="dropdown">
             <label tabIndex={0} className="btn btn-ghost lg:hidden">
-              <MdOutlineMenu></MdOutlineMenu>
+              <MdOutlineMenu className="text-3xl"></MdOutlineMenu>
             </label>
             <ul
               tabIndex={0}
@@ -51,6 +51,7 @@ const Navbar = () => {
               <li>
                 <a>Logout</a>
               </li>
+              <li><Link to='/login'>login</Link></li>
             </ul>
           </div>
         </div>

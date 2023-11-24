@@ -49,28 +49,28 @@ const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
-      const userEmail = currentUser?.email || user?.email;
-      const loggedUser = { email: userEmail };
+    //   const userEmail = currentUser?.email || user?.email;
+    //   const loggedUser = { email: userEmail };
       setUser(currentUser);
       setLoader(false);
-      if (currentUser) {
-        axios
-          .post("https://restica-server.vercel.app/api/v1/jwt", loggedUser, {
-            withCredentials: true,
-          })
-          .then((res) => console.log("access token", res.data));
-      } else {
-        axios
-          .post("https://restica-server.vercel.app/api/v1/logout", loggedUser, {
-            withCredentials: true,
-          })
-          .then((res) => console.log("clean access token", res.data));
-      }
+    //   if (currentUser) {
+    //     axios
+    //       .post("https://restica-server.vercel.app/api/v1/jwt", loggedUser, {
+    //         withCredentials: true,
+    //       })
+    //       .then((res) => console.log("access token", res.data));
+    //   } else {
+    //     axios
+    //       .post("https://restica-server.vercel.app/api/v1/logout", loggedUser, {
+    //         withCredentials: true,
+    //       })
+    //       .then((res) => console.log("clean access token", res.data));
+    //   }
     });
     return () => {
       return unSubscribe();
     };
-  }, [user?.email]);
+  }, []);
 
   const authInfo = {
     user,

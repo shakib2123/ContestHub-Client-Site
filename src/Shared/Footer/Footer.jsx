@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import Logo from "../../components/Logo/Logo";
 
 const Footer = () => {
   return (
@@ -6,11 +7,10 @@ const Footer = () => {
       <div className="container px-5 py-24 mx-auto flex md:items-center lg:items-start md:flex-row md:flex-nowrap flex-wrap flex-col">
         <div className="w-64 flex-shrink-0 md:mx-0 mx-auto text-center md:text-left">
           <Link className="flex title-font font-medium items-center md:justify-start justify-center text-gray-200">
-            <img className="w-[80px] md:w-[100px]" src="/logo.png" alt="" />
-            <span className="ml-3 text-xl">RESTICA</span>
+            <Logo></Logo>
           </Link>
           <p className="mt-2 text-sm text-gray-300">
-            Savor the Flavors at Restica: Your Culinary Oasis!
+            Savor the Flavors at ContestHub: Your Culinary Oasis!
           </p>
         </div>
         <div className="flex-grow flex flex-wrap md:pl-20 -mb-10 md:mt-0 mt-10 md:text-left text-center">
@@ -101,7 +101,7 @@ const Footer = () => {
       <div className="">
         <div className="container mx-auto py-4 px-5 flex flex-wrap flex-col sm:flex-row">
           <p className="text-gray-100 text-sm text-center sm:text-left">
-            Copyright © 2023 - All right reserved by RESTICA Industries Ltd
+            Copyright © 2023 - All right reserved by ContestHub Industries Ltd
           </p>
           <span className="inline-flex sm:ml-auto sm:mt-0 mt-2 justify-center sm:justify-start">
             <a className="text-gray-100">

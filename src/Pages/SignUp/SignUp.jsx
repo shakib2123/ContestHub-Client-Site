@@ -1,13 +1,18 @@
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Lottie from "lottie-react";
 import { useForm } from "react-hook-form";
 import RegisterAnime from "../../assets/Register-Anime.json";
-import Swal from "sweetalert2";
 import toast from "react-hot-toast";
 import useAuth from "../../hooks/useAuth";
-import { Link } from "react-router-dom";
 import Social from "../../components/social/Social";
-const Login = () => {
-  //   const { logIn } = useAuth();
+
+const SignUp = () => {
+  const { createUser, profileUpdate, googleLogin } = useAuth();
+  const navigate = useNavigate();
+
+  //   const from = location.state.from.pathname
+  //     ? location.state.from.pathname
+  //     : "/";
   const {
     register,
     handleSubmit,
@@ -16,19 +21,54 @@ const Login = () => {
 
   const onSubmit = (data) => {
     console.log(data);
-
-    // logIn(data.email, data.password)
-    //   .then((res) => console.log(res))
-    //   .catch((error) => console.log(error));
+    createUser(data.email, data.password)
+      .then((res) => {
+        console.log(res);
+        profileUpdate(data.name, data.photo).then(() => {
+          navigate("/");
+          toast.success("sign up successfully!");
+        });
+      })
+      .catch((err) => {
+        console.log(err.message);
+        toast.error(err.message);
+      });
   };
-
   return (
     <div className="overflow-hidden  flex flex-col-reverse md:flex-row max-w-7xl mx-auto  p-3 md:p-16">
       <div className="md:w-1/2 bg-gray-100 p-4 rounded-lg">
         <h2 className="text-3xl md:text-4xl text-center font-medium text-gray-700">
-          Log In!
+          Sign Up!
         </h2>
         <form onSubmit={handleSubmit(onSubmit)}>
+          <div className="form-control">
+            <label className="label">
+              <span className="label-text">Name</span>
+            </label>
+            <input
+              {...register("name", { required: true })}
+              type="text"
+              placeholder="Type your name..."
+              className="input input-bordered"
+            />
+            {errors.name && (
+              <span className="text-red-600">Name is required</span>
+            )}
+          </div>
+          <div className="form-control">
+            <label className="label">
+              <span className="label-text">Photo URL</span>
+            </label>
+            <input
+              {...register("photo", { required: true })}
+              type="text"
+              placeholder="Photo URL"
+              className="input input-bordered"
+            />
+            {errors.photo && (
+              <span className="text-red-600">Photo is required</span>
+            )}
+          </div>
           <div className="form-control">
             <label className="label">
               <span className="label-text">Email</span>
@@ -84,16 +124,16 @@ const Login = () => {
           <input
             className="bg-[#1d3557] btn btn-block text-white hover:bg-[#457b9d] mt-4"
             type="submit"
-            value="Login"
+            value="Sign Up"
           />
         </form>
         <p className="text-blue-700 mt-2 text-center">
-          Have no account?{" "}
+          Already have an account?{" "}
           <Link
-            to="/signup"
+            to="/login"
             className="font-semibold hover:font-bold hover:underline"
           >
-            sign up please
+            login please
           </Link>
         </p>
         <div className="divider divider-neutral">OR</div>
@@ -106,4 +146,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default SignUp;
