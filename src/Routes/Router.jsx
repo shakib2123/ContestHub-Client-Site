@@ -4,6 +4,8 @@ import Home from "../Pages/Home/Home/Home";
 import ErrorPage from "../Pages/ErrorPage/ErrorPage";
 import Login from "../Pages/Login/Login";
 import SignUp from "../Pages/SignUp/SignUp";
+import Dashboard from "../layouts/Dashboard";
+import AddContest from "../Dashboard/Pages/AddContest";
 
 const Router = createBrowserRouter([
   {
@@ -24,6 +26,16 @@ const Router = createBrowserRouter([
   {
     path: "/signup",
     element: <SignUp></SignUp>,
+  },
+  {
+    path: "/dashboard",
+    element: <Dashboard></Dashboard>,
+    children: [
+      {
+        path: "addContest",
+        element: <AddContest></AddContest>,
+      },
+    ],
   },
 ]);
 

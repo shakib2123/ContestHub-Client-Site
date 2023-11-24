@@ -1,13 +1,13 @@
 import Lottie from "lottie-react";
 import { useForm } from "react-hook-form";
 import RegisterAnime from "../../assets/Register-Anime.json";
-import Swal from "sweetalert2";
 import toast from "react-hot-toast";
 import useAuth from "../../hooks/useAuth";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Social from "../../components/social/Social";
 const Login = () => {
-  //   const { logIn } = useAuth();
+  const { logIn } = useAuth();
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -17,9 +17,16 @@ const Login = () => {
   const onSubmit = (data) => {
     console.log(data);
 
-    // logIn(data.email, data.password)
-    //   .then((res) => console.log(res))
-    //   .catch((error) => console.log(error));
+    logIn(data.email, data.password)
+      .then((res) => {
+        console.log(res);
+        toast.success("Login successfully!");
+        navigate("/");
+      })
+      .catch((error) => {
+        console.log(error);
+        toast.error(error.message);
+      });
   };
 
   return (
