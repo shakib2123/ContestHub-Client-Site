@@ -11,6 +11,7 @@ import ContestDetails from "../Dashboard/Pages/ContestDetails/ContestDetails";
 import MyContest from "../Dashboard/Pages/MyContest/MyContest";
 import UpdateContest from "../Dashboard/UpdateContest/UpdateContest";
 import ContestSubmission from "../Dashboard/Pages/ContestSubmission.jsx/ContestSubmission";
+import ManageUsers from "../Dashboard/Pages/ManageUsers/ManageUsers";
 
 const Router = createBrowserRouter([
   {
@@ -48,6 +49,13 @@ const Router = createBrowserRouter([
     path: "/dashboard",
     element: <Dashboard></Dashboard>,
     children: [
+      // admin routes
+      {
+        path: "manageUsers",
+        element: <ManageUsers />,
+      },
+
+      // creator routes
       {
         path: "addContest",
         element: <AddContest></AddContest>,

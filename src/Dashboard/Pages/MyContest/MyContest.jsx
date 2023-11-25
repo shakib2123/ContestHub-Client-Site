@@ -21,7 +21,6 @@ const MyContest = () => {
       return res.data;
     },
   });
-  console.log(contests);
 
   const handleDelete = (id) => {
     Swal.fire({

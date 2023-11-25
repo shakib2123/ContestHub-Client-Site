@@ -11,7 +11,7 @@ const AllContest = () => {
   const handleClick = (type) => {
     setCategory(type);
   };
-  console.log(category);
+
   const {
     data: allContest = [],
     isLoading,
@@ -23,8 +23,6 @@ const AllContest = () => {
       return res.data;
     },
   });
-
-  console.log(allContest);
 
   return (
     <div className="max-w-7xl mx-auto">

@@ -7,7 +7,7 @@ const CreatorMenu = () => {
     <div>
       <MenuItem
         address="addContest"
-        label=" Add Contest"
+        label="Add Contest"
         icon={MdCreateNewFolder}
       />
       <MenuItem

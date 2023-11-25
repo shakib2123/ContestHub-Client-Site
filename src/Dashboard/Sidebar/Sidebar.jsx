@@ -7,19 +7,29 @@ import { useState } from "react";
 import { GrLogout } from "react-icons/gr";
 import { FcSettings } from "react-icons/fc";
 import { AiOutlineBars } from "react-icons/ai";
-import { BsGraphUp } from "react-icons/bs";
+
 import Logo from "../../components/Logo/Logo";
 import CreatorMenu from "../Menu/CreatorMenu";
 import MenuItem from "../MenuItem";
+import { FaHome } from "react-icons/fa";
+import AdminMenu from "../Menu/AdminMenu";
+import useAxios from "../../hooks/useAxios";
+import useAuth from "../../hooks/useAuth";
+import { useQuery } from "@tanstack/react-query";
 
 const Sidebar = () => {
-  const [toggle, setToggle] = useState(false);
+  const { user, loader } = useAuth();
   const [isActive, setActive] = useState(true);
+  const axiosSecure = useAxios();
+  const { data: userData } = useQuery({
+    enabled: !loader,
+    queryKey: ["userData"],
+    queryFn: async () => {
+      const res = await axiosSecure.get(`/users/${user?.email}`);
+      return res.data;
+    },
+  });
 
-  //   For guest/host menu item toggle button
-  const toggleHandler = (event) => {
-    setToggle(event.target.checked);
-  };
   // Sidebar Responsive Handler
   const handleToggle = () => {
     setActive(!isActive);
@@ -49,15 +59,17 @@ const Sidebar = () => {
       >
         <div>
           <Logo></Logo>
-          <CreatorMenu></CreatorMenu>
+          {userData?.role === "creator" && <CreatorMenu></CreatorMenu>}
+          {userData?.role === "admin" && <AdminMenu></AdminMenu>}
         </div>
         <div>
           <hr />
+          <MenuItem icon={FaHome} label="Home" address="/" />
 
           <MenuItem
             icon={FcSettings}
             label="Profile"
-            address="/dashboard/profile" 
+            address="/dashboard/profile"
           />
           <button className="flex w-full items-center px-4 py-2 mt-5 text-gray-600 hover:bg-gray-300   hover:text-gray-700 transition-colors duration-300 transform">
             <GrLogout className="w-5 h-5" />
