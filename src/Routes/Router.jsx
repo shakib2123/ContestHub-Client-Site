@@ -8,6 +8,7 @@ import Dashboard from "../layouts/Dashboard";
 import AddContest from "../Dashboard/Pages/AddContest";
 import AllContest from "../Pages/AllContest/AllContest";
 import ContestDetails from "../Dashboard/Pages/ContestDetails/ContestDetails";
+import MyContest from "../Dashboard/Pages/MyContest/MyContest";
 
 const Router = createBrowserRouter([
   {
@@ -22,6 +23,12 @@ const Router = createBrowserRouter([
       {
         path: "/allContest",
         element: <AllContest></AllContest>,
+      },
+      {
+        path: "contestDetails/:id",
+        element: <ContestDetails></ContestDetails>,
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/contests/${params.id}`),
       },
     ],
   },
@@ -42,10 +49,8 @@ const Router = createBrowserRouter([
         element: <AddContest></AddContest>,
       },
       {
-        path: "contestDetails/:id",
-        element: <ContestDetails></ContestDetails>,
-        loader: ({ params }) =>
-          fetch(`http://localhost:5000/contests/${params.id}`),
+        path: "myContest",
+        element: <MyContest></MyContest>,
       },
     ],
   },

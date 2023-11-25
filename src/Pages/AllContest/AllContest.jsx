@@ -5,7 +5,6 @@ import { FaBriefcase, FaFirstAid, FaGamepad } from "react-icons/fa";
 import { FaFilePen } from "react-icons/fa6";
 import "react-tabs/style/react-tabs.css";
 import { useState } from "react";
-
 const AllContest = () => {
   const axiosSecure = useAxios();
   const [category, setCategory] = useState("");
@@ -24,6 +23,7 @@ const AllContest = () => {
       return res.data;
     },
   });
+
   console.log(allContest);
 
   return (
