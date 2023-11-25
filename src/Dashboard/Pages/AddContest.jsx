@@ -1,9 +1,11 @@
 import { useForm } from "react-hook-form";
 import useAxios from "../../hooks/useAxios";
 import Swal from "sweetalert2";
+import useAuth from "../../hooks/useAuth";
 
 const AddContest = () => {
   const axiosSecure = useAxios();
+  const { user } = useAuth();
   const {
     register,
     handleSubmit,
@@ -23,6 +25,10 @@ const AddContest = () => {
       instruction: data.instruction,
       contestType: data.type,
       deadline: data.deadline,
+      attendance: 0,
+      creatorName: user?.displayName,
+      creatorImage: user?.photoURL,
+      creatorEmail: user?.email,
     };
     console.log(contestData);
     axiosSecure.post("/contests", contestData).then((res) => {

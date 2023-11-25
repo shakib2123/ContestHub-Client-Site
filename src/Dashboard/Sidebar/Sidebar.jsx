@@ -10,6 +10,7 @@ import { AiOutlineBars } from "react-icons/ai";
 import { BsGraphUp } from "react-icons/bs";
 import Logo from "../../components/Logo/Logo";
 import CreatorMenu from "../Menu/CreatorMenu";
+import MenuItem from "../MenuItem";
 
 const Sidebar = () => {
   const [toggle, setToggle] = useState(false);
@@ -53,11 +54,11 @@ const Sidebar = () => {
         <div>
           <hr />
 
-          {/* <MenuItem
+          <MenuItem
             icon={FcSettings}
             label="Profile"
             address="/dashboard/profile" 
-          />*/}
+          />
           <button className="flex w-full items-center px-4 py-2 mt-5 text-gray-600 hover:bg-gray-300   hover:text-gray-700 transition-colors duration-300 transform">
             <GrLogout className="w-5 h-5" />
 

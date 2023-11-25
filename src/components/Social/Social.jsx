@@ -1,11 +1,12 @@
-import { FaGoogle } from "react-icons/fa";
 import useAuth from "../../hooks/useAuth";
 
 import { useNavigate } from "react-router-dom";
+import useAxios from "../../hooks/useAxios";
+import toast from "react-hot-toast";
 
 const Social = () => {
   const { googleLogin } = useAuth();
-  //   const axiosPublic = useAxiosPublic();
+  const axiosSecure = useAxios();
   const navigate = useNavigate();
 
   const handleGoogleSignIn = () => {
@@ -14,12 +15,14 @@ const Social = () => {
       const userInfo = {
         name: result.user.displayName,
         email: result.user.email,
+        role: "guest",
       };
-      navigate("/");
-      //   axiosPublic.post("/users", userInfo).then((res) => {
-      //     console.log(res.data);
-      //
-      //   });
+
+      axiosSecure.post("/users", userInfo).then((res) => {
+        console.log(res.data);
+        navigate("/");
+        toast.success("sign up successfully!");
+      });
     });
   };
   return (

@@ -23,7 +23,7 @@ const Navlinks = () => {
               ? "md:text-xl font-bold text-[#e63946] border border-[#e63946]"
               : "text-gray-800 font-bold md:text-lg"
           }
-          to="all-contest"
+          to="allContest"
         >
           <FaLightbulb></FaLightbulb>
           All Contest

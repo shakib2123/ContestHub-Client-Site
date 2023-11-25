@@ -5,9 +5,11 @@ import RegisterAnime from "../../assets/Register-Anime.json";
 import toast from "react-hot-toast";
 import useAuth from "../../hooks/useAuth";
 import Social from "../../components/social/Social";
+import useAxios from "../../hooks/useAxios";
 
 const SignUp = () => {
-  const { createUser, profileUpdate, googleLogin } = useAuth();
+  const { createUser, profileUpdate } = useAuth();
+  const axiosSecure = useAxios();
   const navigate = useNavigate();
 
   //   const from = location.state.from.pathname
@@ -25,8 +27,18 @@ const SignUp = () => {
       .then((res) => {
         console.log(res);
         profileUpdate(data.name, data.photo).then(() => {
-          navigate("/");
-          toast.success("sign up successfully!");
+          const userData = {
+            name: data.name,
+            email: data.email,
+            role: "guest",
+          };
+          axiosSecure.post("/users", userData).then((res) => {
+            console.log(res.data);
+            if (res.data.insertedId) {
+              toast.success("sign up successfully!");
+              navigate("/");
+            }
+          });
         });
       })
       .catch((err) => {

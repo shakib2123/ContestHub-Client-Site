@@ -6,6 +6,7 @@ import Login from "../Pages/Login/Login";
 import SignUp from "../Pages/SignUp/SignUp";
 import Dashboard from "../layouts/Dashboard";
 import AddContest from "../Dashboard/Pages/AddContest";
+import AllContest from "../Pages/AllContest/AllContest";
 
 const Router = createBrowserRouter([
   {
@@ -16,6 +17,10 @@ const Router = createBrowserRouter([
       {
         path: "/",
         element: <Home></Home>,
+      },
+      {
+        path: "/allContest",
+        element: <AllContest></AllContest>,
       },
     ],
   },
