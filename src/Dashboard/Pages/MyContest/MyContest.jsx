@@ -3,6 +3,7 @@ import useAxios from "../../../hooks/useAxios";
 import useAuth from "../../../hooks/useAuth";
 import { FaFilePen } from "react-icons/fa6";
 import { MdDelete, MdWatchLater } from "react-icons/md";
+import { Link } from "react-router-dom";
 const MyContest = () => {
   const axiosSecure = useAxios();
   const { user, loader } = useAuth();
@@ -67,9 +68,11 @@ const MyContest = () => {
                 </span>
               </td>
               <th>
-                <button className="btn bg-blue-300 btn-xs">
-                  <FaFilePen /> Update
-                </button>
+                <Link to={`/dashboard/updateContest/${contest._id}`}>
+                  <button className="btn bg-blue-300 btn-xs">
+                    <FaFilePen /> Update
+                  </button>
+                </Link>
                 <br />
                 <button className="btn bg-red-300 btn-xs mt-2">
                   <MdDelete />
@@ -77,7 +80,9 @@ const MyContest = () => {
                 </button>
               </th>
               <th>
-                <button className="btn btn-ghost bg-green-300 btn-xs">See submission</button>
+                <button className="btn btn-ghost bg-green-300 btn-xs">
+                  See submission
+                </button>
               </th>
             </tr>
           ))}

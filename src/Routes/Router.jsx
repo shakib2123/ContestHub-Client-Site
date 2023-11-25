@@ -9,6 +9,7 @@ import AddContest from "../Dashboard/Pages/AddContest";
 import AllContest from "../Pages/AllContest/AllContest";
 import ContestDetails from "../Dashboard/Pages/ContestDetails/ContestDetails";
 import MyContest from "../Dashboard/Pages/MyContest/MyContest";
+import UpdateContest from "../Dashboard/UpdateContest/UpdateContest";
 
 const Router = createBrowserRouter([
   {
@@ -40,6 +41,8 @@ const Router = createBrowserRouter([
     path: "/signup",
     element: <SignUp></SignUp>,
   },
+
+  // dashboard routes
   {
     path: "/dashboard",
     element: <Dashboard></Dashboard>,
@@ -51,6 +54,12 @@ const Router = createBrowserRouter([
       {
         path: "myContest",
         element: <MyContest></MyContest>,
+      },
+      {
+        path: "updateContest/:id",
+        element: <UpdateContest />,
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/contests/${params.id}`),
       },
     ],
   },

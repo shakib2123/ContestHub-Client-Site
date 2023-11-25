@@ -1,15 +1,16 @@
 import { useForm } from "react-hook-form";
-import useAxios from "../../hooks/useAxios";
+import { useLoaderData } from "react-router-dom";
 import Swal from "sweetalert2";
-import useAuth from "../../hooks/useAuth";
+import useAxios from "../../hooks/useAxios";
 
-const AddContest = () => {
+const UpdateContest = () => {
+  const loadedContest = useLoaderData();
+  
   const axiosSecure = useAxios();
-  const { user } = useAuth();
+
   const {
     register,
     handleSubmit,
-    reset,
     formState: { errors },
   } = useForm();
 
@@ -17,7 +18,6 @@ const AddContest = () => {
     console.log(data);
     const contestData = {
       contestName: data.name,
-
       image: data.image,
       description: data.description,
       price: parseInt(data.price),
@@ -25,24 +25,22 @@ const AddContest = () => {
       instruction: data.instruction,
       contestType: data.type,
       deadline: data.deadline,
-      attendance: 0,
-      status: "Pending",
-      creatorName: user?.displayName,
-      creatorImage: user?.photoURL,
-      creatorEmail: user?.email,
     };
-    console.log(contestData);
-    axiosSecure.post("/contests", contestData).then((res) => {
-      console.log(res.data);
-      Swal.fire({
-        position: "center",
-        icon: "success",
-        title: "Contest added successfully!",
-        showConfirmButton: false,
-        timer: 2000,
+
+    axiosSecure
+      .put(`/contests/${loadedContest?._id}`, contestData)
+      .then((res) => {
+        console.log(res.data);
+        if (res.data.modifiedCount > 0) {
+          Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "Contest updated successfully!",
+            showConfirmButton: false,
+            timer: 2000,
+          });
+        }
       });
-      reset();
-    });
   };
   return (
     <div>
@@ -56,6 +54,7 @@ const AddContest = () => {
               <input
                 {...register("name", { required: true })}
                 type="text"
+                defaultValue={loadedContest.contestName}
                 placeholder="Contest name"
                 className="input input-bordered"
               />
@@ -69,7 +68,7 @@ const AddContest = () => {
                 <span className="label-text">Contest type</span>
               </label>
               <select
-                defaultValue=""
+                defaultValue={loadedContest.contestType}
                 {...register("type", { required: true })}
                 className="select select-bordered w-full"
               >
@@ -91,6 +90,7 @@ const AddContest = () => {
               </label>
               <input
                 {...register("price", { required: true })}
+                defaultValue={loadedContest.price}
                 type="number"
                 placeholder="price"
                 className="input input-bordered"
@@ -105,6 +105,7 @@ const AddContest = () => {
               </label>
               <input
                 {...register("prize", { required: true })}
+                defaultValue={loadedContest.prize}
                 type="number"
                 placeholder="Prize Money"
                 className="input input-bordered"
@@ -119,6 +120,7 @@ const AddContest = () => {
               </label>
               <input
                 {...register("deadline", { required: true })}
+                defaultValue={loadedContest.deadline}
                 type="date"
                 placeholder="Contest Deadline"
                 className="input input-bordered"
@@ -135,6 +137,7 @@ const AddContest = () => {
               </label>
               <input
                 {...register("instruction", { required: true })}
+                defaultValue={loadedContest.instruction}
                 type="text"
                 placeholder="Task Submission instruction"
                 className="input input-bordered"
@@ -152,6 +155,7 @@ const AddContest = () => {
               </label>
               <input
                 {...register("image", { required: true })}
+                defaultValue={loadedContest.image}
                 type="text"
                 placeholder="Image"
                 className="input input-bordered"
@@ -166,6 +170,7 @@ const AddContest = () => {
               </label>
               <textarea
                 {...register("description", { required: true })}
+                defaultValue={loadedContest.description}
                 className="textarea textarea-bordered"
                 placeholder="Contest Description"
               ></textarea>
@@ -188,4 +193,4 @@ const AddContest = () => {
   );
 };
 
-export default AddContest;
+export default UpdateContest;
