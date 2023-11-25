@@ -10,6 +10,7 @@ import AllContest from "../Pages/AllContest/AllContest";
 import ContestDetails from "../Dashboard/Pages/ContestDetails/ContestDetails";
 import MyContest from "../Dashboard/Pages/MyContest/MyContest";
 import UpdateContest from "../Dashboard/UpdateContest/UpdateContest";
+import ContestSubmission from "../Dashboard/Pages/ContestSubmission.jsx/ContestSubmission";
 
 const Router = createBrowserRouter([
   {
@@ -60,6 +61,10 @@ const Router = createBrowserRouter([
         element: <UpdateContest />,
         loader: ({ params }) =>
           fetch(`http://localhost:5000/contests/${params.id}`),
+      },
+      {
+        path: "contestSubmission",
+        element: <ContestSubmission></ContestSubmission>,
       },
     ],
   },

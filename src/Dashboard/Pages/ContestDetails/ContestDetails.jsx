@@ -28,7 +28,7 @@ const ContestDetails = () => {
                   </div>
                   <div className="flex text-red-600 m-2">
                     <div className="m-1 font-bold">Deadline:</div>
-                    <div className="m-1">31 March, 2023</div>
+                    <div className="m-1">{contest.deadline}</div>
                   </div>
                   <div className="flex text-green-600 text-sm m-2">
                     <div className="m-1 font-bold">Attendance:</div>

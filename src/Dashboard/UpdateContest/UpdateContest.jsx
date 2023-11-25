@@ -5,7 +5,6 @@ import useAxios from "../../hooks/useAxios";
 
 const UpdateContest = () => {
   const loadedContest = useLoaderData();
-  
   const axiosSecure = useAxios();
 
   const {
@@ -26,6 +25,7 @@ const UpdateContest = () => {
       contestType: data.type,
       deadline: data.deadline,
     };
+    console.log(contestData, loadedContest.contestType);
 
     axiosSecure
       .put(`/contests/${loadedContest?._id}`, contestData)
@@ -68,13 +68,10 @@ const UpdateContest = () => {
                 <span className="label-text">Contest type</span>
               </label>
               <select
-                defaultValue={loadedContest.contestType}
+                defaultValue={loadedContest?.contestType}
                 {...register("type", { required: true })}
                 className="select select-bordered w-full"
               >
-                <option disabled value="">
-                  Select your category
-                </option>
                 <option value="Business Contest">Business Contest</option>
                 <option value="Medical Contest">Medical Contest</option>
                 <option value="Article Writing">Article Writing</option>
