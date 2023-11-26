@@ -49,8 +49,8 @@ const MyContest = () => {
   };
 
   return (
-    <div className="max-w-7xl mx-auto">
-      <table className="table">
+    <div className="max-w-7xl mx-auto overflow-auto">
+      <table className="table min-w-[900px]">
         {/* head */}
         <thead>
           <tr>
