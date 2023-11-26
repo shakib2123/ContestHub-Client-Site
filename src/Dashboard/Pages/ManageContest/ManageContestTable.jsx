@@ -19,6 +19,32 @@ const ManageContestTable = ({ contest, refetch, index }) => {
       }
     });
   };
+
+  const handleDelete = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosSecure.delete(`/contests/${id}`).then((res) => {
+          console.log(res.data);
+          if (res.data.deletedCount > 0) {
+            Swal.fire({
+              title: "Deleted!",
+              text: "Contest has been deleted.",
+              icon: "success",
+            });
+          }
+          refetch();
+        });
+      }
+    });
+  };
   return (
     <tr>
       <th>{index + 1}</th>
@@ -54,14 +80,17 @@ const ManageContestTable = ({ contest, refetch, index }) => {
           </span>
         ) : (
           <button
-            onClick={()=>handleConfirm(contest._id)}
+            onClick={() => handleConfirm(contest._id)}
             className="btn bg-blue-100 text-blue-600 btn-xs"
           >
             <MdWatchLater /> Confirm
           </button>
         )}
         <br />
-        <button className="btn bg-red-100 text-red-600 btn-xs mt-3">
+        <button
+          onClick={() => handleDelete(contest._id)}
+          className="btn bg-red-100 text-red-600 btn-xs mt-3"
+        >
           <FaTrash /> Delete
         </button>
       </th>

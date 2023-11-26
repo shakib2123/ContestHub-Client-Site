@@ -11,6 +11,7 @@ import {
 } from "firebase/auth";
 import auth from "../firebase/firebase.config";
 import axios from "axios";
+import useAxios from "../hooks/useAxios";
 
 export const AuthContext = createContext(null);
 const AuthProvider = ({ children }) => {
@@ -18,6 +19,7 @@ const AuthProvider = ({ children }) => {
   const githubProvider = new GithubAuthProvider();
   const [user, setUser] = useState(null);
   const [loader, setLoader] = useState(true);
+  const axiosSecure = useAxios();
   const createUser = (email, password) => {
     setLoader(true);
     return createUserWithEmailAndPassword(auth, email, password);
@@ -49,28 +51,23 @@ const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
-      //   const userEmail = currentUser?.email || user?.email;
-      //   const loggedUser = { email: userEmail };
       setUser(currentUser);
-      setLoader(false);
-      //   if (currentUser) {
-      //     axios
-      //       .post("https://restica-server.vercel.app/api/v1/jwt", loggedUser, {
-      //         withCredentials: true,
-      //       })
-      //       .then((res) => console.log("access token", res.data));
-      //   } else {
-      //     axios
-      //       .post("https://restica-server.vercel.app/api/v1/logout", loggedUser, {
-      //         withCredentials: true,
-      //       })
-      //       .then((res) => console.log("clean access token", res.data));
-      //   }
+      if (currentUser) {
+        const userInfo = currentUser.email;
+        axiosSecure.post("/jwt", userInfo).then((res) => {
+          console.log(res.data);
+          localStorage.setItem("access-token", res.data);
+          setLoader(false);
+        });
+      } else {
+        localStorage.removeItem("access-token");
+        setLoader(false);
+      }
     });
     return () => {
       return unSubscribe();
     };
-  }, []);
+  }, [axiosSecure]);
   console.log(user);
 
   const authInfo = {
