@@ -26,13 +26,18 @@ const ContestSubmission = () => {
       confirmButtonText: "Yes, declare it!",
     }).then((result) => {
       if (result.isConfirmed) {
+        const winnerData = {
+          winnerName: submission.name,
+          winnerEmail: submission.email,
+          winnerImage: submission.image,
+        };
         axiosSecure
           .put(`/registrations/${submission._id}`, { winner: "winner" })
           .then((res) => {
             console.log(res.data);
             if (res.data.modifiedCount > 0) {
               axiosSecure
-                .put(`/contests/winner/${submission.contestId}`)
+                .put(`/contests/winner/${submission.contestId}`, winnerData)
                 .then((res) => {
                   console.log(res.data);
                   if (res.data.modifiedCount > 0) {
@@ -95,7 +100,7 @@ const ContestSubmission = () => {
                     </button>
                   ) : (
                     <span className="text-green-800 bg-green-100 p-1 rounded-lg">
-                      Declared
+                      Declared as winner
                     </span>
                   )}
                 </th>

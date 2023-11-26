@@ -14,6 +14,7 @@ import ContestSubmission from "../Dashboard/Pages/ContestSubmission.jsx/ContestS
 import ManageUsers from "../Dashboard/Pages/ManageUsers/ManageUsers";
 import ManageContest from "../Dashboard/Pages/ManageContest/ManageContest";
 import Payment from "../Dashboard/Pages/Payment/Payment";
+import PrivateRoute from "../PrivateRoute/PrivateRoute";
 
 const Router = createBrowserRouter([
   {
@@ -37,7 +38,11 @@ const Router = createBrowserRouter([
       },
       {
         path: "payment/:id",
-        element: <Payment />,
+        element: (
+          <PrivateRoute>
+            <Payment />
+          </PrivateRoute>
+        ),
         loader: ({ params }) =>
           fetch(`http://localhost:5000/contests/${params.id}`),
       },

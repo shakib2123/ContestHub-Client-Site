@@ -12,7 +12,7 @@ const CheckoutForm = ({ loadedContest }) => {
   const [error, setError] = useState("");
   const [clientSecret, setClientSecret] = useState("");
   const [transactionId, setTransactionId] = useState("");
-
+  console.log(loadedContest.attendance);
   useEffect(() => {
     if (loadedContest.price > 0) {
       axiosSecure
@@ -88,21 +88,29 @@ const CheckoutForm = ({ loadedContest }) => {
         const res = await axiosSecure.post("/registrations", registration);
 
         if (res.data?.insertedId) {
-          Swal.fire("success", "payment successfully");
+          axiosSecure
+            .put(`/contests/attendance/${loadedContest._id}`, {
+              attendance: loadedContest.attendance + 1,
+            })
+            .then((res) => {
+              console.log(res.data);
+              if (res.data.modifiedCount > 0) {
+                Swal.fire("success", "payment successfully");
+              }
+            });
         }
       }
     }
   };
   return (
     <div className="max-w-7xl mx-auto flex justify-center items-center min-h-[calc(100vh-150px)] p-4 md:p-10">
-      <div className=" p-4 max-w-lg border-2 border-gray-500 bg-gray-100 rounded-2xl">
+      <div className=" p-4 max-w-xl min-w-[405px] border-2 border-gray-500 bg-gray-100 rounded-2xl">
         <div className="mb-3">
-          
           <img
-            className="mask mask-parallelogram-2"
+            className="mask mask-parallelogram-2 w-full "
             src={loadedContest.image}
           />
-          <h2 className="text-2xl font-semibold text-gray-700">
+          <h2 className="text-2xl font-semibold text-center text-gray-700">
             {loadedContest.contestName}
           </h2>
         </div>

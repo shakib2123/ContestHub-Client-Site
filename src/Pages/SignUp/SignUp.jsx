@@ -11,10 +11,7 @@ const SignUp = () => {
   const { createUser, profileUpdate } = useAuth();
   const axiosSecure = useAxios();
   const navigate = useNavigate();
-
-  //   const from = location.state.from.pathname
-  //     ? location.state.from.pathname
-  //     : "/";
+  const location = useLocation();
   const {
     register,
     handleSubmit,
@@ -36,7 +33,12 @@ const SignUp = () => {
             console.log(res.data);
             if (res.data.insertedId) {
               toast.success("sign up successfully!");
-              navigate("/");
+              navigate(
+                location?.state?.from?.pathname
+                  ? location?.state?.from?.pathname
+                  : "/",
+                { replace: true }
+              );
             }
           });
         });

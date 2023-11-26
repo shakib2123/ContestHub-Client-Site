@@ -3,11 +3,12 @@ import { useForm } from "react-hook-form";
 import RegisterAnime from "../../assets/Register-Anime.json";
 import toast from "react-hot-toast";
 import useAuth from "../../hooks/useAuth";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Social from "../../components/social/Social";
 const Login = () => {
   const { logIn } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
   const {
     register,
     handleSubmit,
@@ -21,7 +22,12 @@ const Login = () => {
       .then((res) => {
         console.log(res);
         toast.success("Login successfully!");
-        navigate("/");
+        navigate(
+          location?.state?.from?.pathname
+            ? location?.state?.from?.pathname
+            : "/",
+          { replace: true }
+        );
       })
       .catch((error) => {
         console.log(error);
