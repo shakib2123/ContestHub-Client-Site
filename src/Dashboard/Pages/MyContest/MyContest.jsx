@@ -121,9 +121,11 @@ const MyContest = () => {
                 </button>
               </th>
               <th>
-                <button className="btn btn-ghost bg-green-300 btn-xs">
-                  See submission
-                </button>
+                <Link to="/dashboard/submittedContest">
+                  <button className="btn btn-ghost bg-green-300 btn-xs">
+                    See submission
+                  </button>
+                </Link>
               </th>
             </tr>
           ))}

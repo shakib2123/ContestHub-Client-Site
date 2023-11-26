@@ -13,6 +13,7 @@ import UpdateContest from "../Dashboard/UpdateContest/UpdateContest";
 import ContestSubmission from "../Dashboard/Pages/ContestSubmission.jsx/ContestSubmission";
 import ManageUsers from "../Dashboard/Pages/ManageUsers/ManageUsers";
 import ManageContest from "../Dashboard/Pages/ManageContest/ManageContest";
+import Payment from "../Dashboard/Pages/Payment/Payment";
 
 const Router = createBrowserRouter([
   {
@@ -25,12 +26,18 @@ const Router = createBrowserRouter([
         element: <Home></Home>,
       },
       {
-        path: "/allContest",
+        path: "allContest",
         element: <AllContest></AllContest>,
       },
       {
         path: "contestDetails/:id",
         element: <ContestDetails></ContestDetails>,
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/contests/${params.id}`),
+      },
+      {
+        path: "payment/:id",
+        element: <Payment />,
         loader: ({ params }) =>
           fetch(`http://localhost:5000/contests/${params.id}`),
       },
@@ -76,7 +83,7 @@ const Router = createBrowserRouter([
           fetch(`http://localhost:5000/contests/${params.id}`),
       },
       {
-        path: "contestSubmission",
+        path: "submittedContest",
         element: <ContestSubmission></ContestSubmission>,
       },
     ],

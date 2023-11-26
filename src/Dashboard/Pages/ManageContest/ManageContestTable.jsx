@@ -2,6 +2,8 @@ import { FaTrash } from "react-icons/fa6";
 import { MdOutlineVerified, MdWatchLater } from "react-icons/md";
 import useAxios from "../../../hooks/useAxios";
 import Swal from "sweetalert2";
+import { FaPenAlt } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const ManageContestTable = ({ contest, refetch, index }) => {
   const axiosSecure = useAxios();
@@ -51,7 +53,7 @@ const ManageContestTable = ({ contest, refetch, index }) => {
       <td>
         <div className="flex items-center gap-3">
           <div className="avatar">
-            <div className="mask mask-squircle w-12 h-12">
+            <div className="mask mask-squircle w-16 h-16">
               <img src={contest?.image} alt="Avatar" />
             </div>
           </div>
@@ -86,6 +88,12 @@ const ManageContestTable = ({ contest, refetch, index }) => {
             <MdWatchLater /> Confirm
           </button>
         )}
+        <br />
+        <Link to={`/dashboard/updateContest/${contest._id}`}>
+          <button className="btn bg-purple-100 text-purple-600 btn-xs mt-3">
+            <FaPenAlt></FaPenAlt> Update
+          </button>
+        </Link>
         <br />
         <button
           onClick={() => handleDelete(contest._id)}

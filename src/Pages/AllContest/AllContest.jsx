@@ -3,7 +3,6 @@ import useAxios from "../../hooks/useAxios";
 import Contest from "./Contest";
 import { FaBriefcase, FaFirstAid, FaGamepad } from "react-icons/fa";
 import { FaFilePen } from "react-icons/fa6";
-import "react-tabs/style/react-tabs.css";
 import { useState } from "react";
 const AllContest = () => {
   const axiosSecure = useAxios();
@@ -19,14 +18,17 @@ const AllContest = () => {
   } = useQuery({
     queryKey: ["allContest", category],
     queryFn: async () => {
-      const res = await axiosSecure.get(`/contests?category=${category}`);
+      const res = await axiosSecure.get(
+        `/contests?category=${category}&status=Accepted`
+      );
       return res.data;
     },
   });
+  console.log(allContest.length);
 
   return (
     <div className="max-w-7xl mx-auto">
-      <div className="flex gap-4 items-center overflow-auto px-4">
+      <div className="flex gap-4 justify-center items-center overflow-auto px-4">
         <div
           onClick={() => handleClick("Business Contest")}
           className={`flex flex-col  items-center justify-center gap-2 p-3 hover:text-neutral-800 transition cursor-pointer ${
@@ -73,7 +75,7 @@ const AllContest = () => {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 mb-8 gap-4 px-2">
         {allContest.map((contest) => (
           <Contest key={contest._id} contest={contest}></Contest>
         ))}

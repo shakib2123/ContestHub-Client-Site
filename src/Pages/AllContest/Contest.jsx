@@ -10,12 +10,12 @@ const Contest = ({ contest }) => {
         style={{
           backgroundImage: `url(${image})`,
         }}
-        className="bg-no-repeat bg-cover bg-center lg:bg-left flex flex-col w-[90%] md:w-full h-96 md:h-[400px] m-2 brightness-110 hover:brightness-90 mx-auto"
+        className="bg-no-repeat bg-cover bg-center lg:bg-left flex flex-col w-full h-96 md:h-[400px] m-2 brightness-110 hover:brightness-90 mx-auto"
       >
-        <div className="absolute inset-0 bg-gray-900 bg-opacity-70 text-center">
-          <div className="flex flex-col items-center justify-center p-2 text-gray-200">
+        <div className=" absolute inset-0 bg-gray-900 bg-opacity-70 text-center">
+          <div className="max-w-sm mx-auto flex flex-col items-center justify-center p-2 text-gray-200">
             <div className="font-bold m-2 mt-[30%]">
-              <h2 className=" text-lg md:text-2xl">{contestName}</h2>
+              <h2 className="text-lg lg:text-2xl">{contestName}</h2>
             </div>
 
             <p className="text-blue-400 text-lg font-medium">

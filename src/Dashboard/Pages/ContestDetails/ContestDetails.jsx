@@ -1,8 +1,33 @@
-import { useLoaderData } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 import { FaCrown } from "react-icons/fa";
 import { BsFillPinAngleFill } from "react-icons/bs";
+import useAxios from "../../../hooks/useAxios";
+import useAuth from "../../../hooks/useAuth";
 const ContestDetails = () => {
   const contest = useLoaderData();
+  const { user } = useAuth();
+  const axiosSecure = useAxios();
+
+  const handleRegister = () => {
+    const registerData = {
+      contestName: contest.contestName,
+      image: contest.image,
+      price: contest.price,
+      prize: contest.prize,
+      deadline: contest.deadline,
+      description: contest.description,
+      competitorName: user?.displayName,
+      competitorImage: user?.photoURL,
+      competitorEmail: user?.email,
+      creatorName: contest.creatorName,
+      creatorEmail: contest.creatorEmail,
+    };
+    console.log(registerData);
+    // axiosSecure.post('/registrations', registerData).then(res =>
+    // {
+
+    // })
+  };
 
   return (
     <div className="flex justify-center items-center min-h-screen">
@@ -57,10 +82,16 @@ const ContestDetails = () => {
                     </div>
                   )}
                   {contest.winnerName && <div className="divider"></div>}
-                  <button className="btn btn-block btn-neutral text-lg">
-                    <BsFillPinAngleFill className="text-2xl" />
-                    Register
-                  </button>
+
+                  <Link to={`/payment/${contest._id}`}>
+                    <button
+                      onClick={handleRegister}
+                      className="btn btn-block btn-neutral text-lg"
+                    >
+                      <BsFillPinAngleFill className="text-2xl" />
+                      Register
+                    </button>
+                  </Link>
                 </div>
               </div>
             </div>
