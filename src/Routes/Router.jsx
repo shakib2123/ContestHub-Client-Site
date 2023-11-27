@@ -16,6 +16,7 @@ import ManageContest from "../Dashboard/Pages/ManageContest/ManageContest";
 import Payment from "../Dashboard/Pages/Payment/Payment";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
 import MyParticipatedContest from "../Dashboard/Pages/MyParticipatedContest/MyParticipatedContest";
+import MyWinningContest from "../Dashboard/Pages/MyWinningContest/MyWinningContest";
 
 const Router = createBrowserRouter([
   {
@@ -97,6 +98,10 @@ const Router = createBrowserRouter([
       {
         path: "myParticipatedContest",
         element: <MyParticipatedContest></MyParticipatedContest>,
+      },
+      {
+        path: "myWinningContest",
+        element: <MyWinningContest></MyWinningContest>,
       },
     ],
   },
