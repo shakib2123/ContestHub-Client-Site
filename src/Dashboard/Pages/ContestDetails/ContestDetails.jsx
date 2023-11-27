@@ -1,33 +1,25 @@
 import { Link, useLoaderData } from "react-router-dom";
 import { FaCrown } from "react-icons/fa";
 import { BsFillPinAngleFill } from "react-icons/bs";
-import useAxios from "../../../hooks/useAxios";
-import useAuth from "../../../hooks/useAuth";
+import { useEffect, useState } from "react";
+import Timer from "../../../components/Timer/Timer";
+
 const ContestDetails = () => {
   const contest = useLoaderData();
-  const { user } = useAuth();
-  const axiosSecure = useAxios();
+  console.log(contest.deadline);
+  const [dateString, setDateString] = useState(contest.deadline);
+  const [totalDays, setTotalDays] = useState(0);
 
-  const handleRegister = () => {
-    const registerData = {
-      contestName: contest.contestName,
-      image: contest.image,
-      price: contest.price,
-      prize: contest.prize,
-      deadline: contest.deadline,
-      description: contest.description,
-      competitorName: user?.displayName,
-      competitorImage: user?.photoURL,
-      competitorEmail: user?.email,
-      creatorName: contest.creatorName,
-      creatorEmail: contest.creatorEmail,
-    };
-    console.log(registerData);
-    // axiosSecure.post('/registrations', registerData).then(res =>
-    // {
+  useEffect(() => {
+    const inputDate = new Date(dateString);
+    const currentDate = new Date();
 
-    // })
-  };
+    const timeDifference = inputDate.getTime() - currentDate.getTime(); //
+    const daysDifference = Math.floor(timeDifference / (1000 * 3600 * 24));
+
+    setTotalDays(daysDifference);
+  }, [dateString]);
+  console.log(totalDays);
 
   return (
     <div className="flex justify-center items-center min-h-screen">
@@ -53,7 +45,9 @@ const ContestDetails = () => {
                   </div>
                   <div className="flex text-red-600 m-2">
                     <div className="m-1 font-bold">Deadline:</div>
-                    <div className="m-1">{contest.deadline}</div>
+                    <div className="m-1">
+                      <Timer duration={totalDays * 24 * 60 * 60 * 1000} />
+                    </div>
                   </div>
                   <div className="flex text-green-600 text-sm m-2">
                     <div className="m-1 font-bold">Attendance:</div>
@@ -83,15 +77,22 @@ const ContestDetails = () => {
                   )}
                   {contest.winnerName && <div className="divider"></div>}
 
-                  <Link to={`/payment/${contest._id}`}>
+                  {totalDays <= 0 ? (
                     <button
-                      onClick={handleRegister}
+                      disabled
                       className="btn btn-block btn-neutral text-lg"
                     >
                       <BsFillPinAngleFill className="text-2xl" />
-                      Register
+                      Deadline is over
                     </button>
-                  </Link>
+                  ) : (
+                    <Link to={`/payment/${contest._id}`}>
+                      <button className="btn btn-block btn-neutral text-lg">
+                        <BsFillPinAngleFill className="text-2xl" />
+                        Register
+                      </button>
+                    </Link>
+                  )}
                 </div>
               </div>
             </div>
