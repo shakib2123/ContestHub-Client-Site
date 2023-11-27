@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import useAxios from "../../../hooks/useAxios";
 import useAuth from "../../../hooks/useAuth";
+import { useNavigate } from "react-router-dom";
 
 const CheckoutForm = ({ loadedContest }) => {
   const stripe = useStripe();
@@ -12,7 +13,7 @@ const CheckoutForm = ({ loadedContest }) => {
   const [error, setError] = useState("");
   const [clientSecret, setClientSecret] = useState("");
   const [transactionId, setTransactionId] = useState("");
-  console.log(loadedContest.attendance);
+  const navigate = useNavigate();
   useEffect(() => {
     if (loadedContest.price > 0) {
       axiosSecure
@@ -80,6 +81,8 @@ const CheckoutForm = ({ loadedContest }) => {
           creatorName: loadedContest.creatorName,
           contestId: loadedContest._id,
           transactionId: paymentIntent.id,
+          contestImage: loadedContest.image,
+          deadline: loadedContest.deadline,
           date: new Date(),
           status: "pending",
           task: task,
@@ -96,6 +99,7 @@ const CheckoutForm = ({ loadedContest }) => {
               console.log(res.data);
               if (res.data.modifiedCount > 0) {
                 Swal.fire("success", "payment successfully");
+                navigate("/dashboard/myParticipatedContest");
               }
             });
         }

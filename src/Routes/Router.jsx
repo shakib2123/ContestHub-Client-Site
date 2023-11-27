@@ -15,6 +15,7 @@ import ManageUsers from "../Dashboard/Pages/ManageUsers/ManageUsers";
 import ManageContest from "../Dashboard/Pages/ManageContest/ManageContest";
 import Payment from "../Dashboard/Pages/Payment/Payment";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
+import MyParticipatedContest from "../Dashboard/Pages/MyParticipatedContest/MyParticipatedContest";
 
 const Router = createBrowserRouter([
   {
@@ -90,6 +91,12 @@ const Router = createBrowserRouter([
       {
         path: "submittedContest",
         element: <ContestSubmission></ContestSubmission>,
+      },
+
+      // guest routes
+      {
+        path: "myParticipatedContest",
+        element: <MyParticipatedContest></MyParticipatedContest>,
       },
     ],
   },

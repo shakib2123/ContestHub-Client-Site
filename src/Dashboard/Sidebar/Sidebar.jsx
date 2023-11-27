@@ -16,6 +16,7 @@ import AdminMenu from "../Menu/AdminMenu";
 import useAxios from "../../hooks/useAxios";
 import useAuth from "../../hooks/useAuth";
 import { useQuery } from "@tanstack/react-query";
+import GuestMenu from "../Menu/GuestMenu";
 
 const Sidebar = () => {
   const { user, loader } = useAuth();
@@ -61,6 +62,7 @@ const Sidebar = () => {
           <Logo></Logo>
           {userData?.role === "creator" && <CreatorMenu></CreatorMenu>}
           {userData?.role === "admin" && <AdminMenu></AdminMenu>}
+          {userData?.role === "guest" && <GuestMenu></GuestMenu>}
         </div>
         <div>
           <hr />

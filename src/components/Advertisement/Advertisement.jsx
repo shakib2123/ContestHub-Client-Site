@@ -13,16 +13,16 @@ const Advertisement = () => {
 
   return (
     <div className="max-w-7xl mt-16 mx-auto mb-16 p-3">
-      <div className="mb-10 max-w-xl mx-auto text-center">
+      <div className="mb-10 max-w-2xl mx-auto text-center">
         <h1 className="text-3xl font-bold mb-3 text-gray-700">
-          Champion`s Corner
+          Latest winner in different contest we found !
         </h1>
         <p className="text-gray-500">
-          "Champion's Corner" Description: Welcome to our Champion's Corner,
-          where triumphs come to life! Discover the essence of victory as we
-          showcase the extraordinary winners of our contests. Immerse yourself
-          in the gallery of champions, witness their journey, and be inspired by
-          their exceptional achievements.
+          Welcome to our Champion's Corner, where triumphs come to life!
+          Discover the essence of victory as we showcase the extraordinary
+          winners of our contests. Immerse yourself in the gallery of champions,
+          witness their journey, and be inspired by their exceptional
+          achievements.
         </p>
       </div>
 
@@ -39,11 +39,11 @@ const Advertisement = () => {
                 alt=""
               />
             </div>
-            <p className="text-center text-sm p-5">{winner.contestName}</p>
+            <h1 className="text-orange-500 text-lg font-semibold">
+              {winner.winnerName}
+            </h1>
             <div className="flex flex-col justify-center text-center lg:space-x-3">
-              <h1 className="text-orange-500 text-lg font-semibold">
-                {winner.winnerName}
-              </h1>
+              <p className="text-center text-sm p-5">{winner.contestName}</p>
               <p className="text-black font-bold lg:mt-[5px]">
                 Total Attendance: {winner.attendance}
               </p>
