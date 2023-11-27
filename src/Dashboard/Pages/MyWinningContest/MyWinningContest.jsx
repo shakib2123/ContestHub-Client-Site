@@ -19,6 +19,7 @@ const MyWinningContest = () => {
   console.log(winningCount);
   const pending = winningCount.filter((win) => win.status === "pending");
   const winning = winningCount.filter((win) => win.status === "winner");
+
   const colors = ["#00C49F", "#FFBB28"];
   const data = [
     { name: "Pending", value: pending.length },
@@ -42,58 +43,103 @@ const MyWinningContest = () => {
   };
 
   return (
-    <div className="flex gap-8 flex-col justify-center items-center">
-      <div>
-        <div className="stats shadow ">
-          <div className="stat place-items-center">
-            <div className="stat-title">Total Participate</div>
-            <div className="stat-value flex items-center gap-1">
-              <MdDoNotDisturbOnTotalSilence /> {winningCount.length}
+    <div className="max-w-7xl mx-auto">
+      <div className="flex gap-8 flex-col  justify-center items-center">
+        <div>
+          <div className="stats shadow ">
+            <div className="stat place-items-center">
+              <div className="stat-title">Total Participate</div>
+              <div className="stat-value flex items-center gap-1">
+                <MdDoNotDisturbOnTotalSilence /> {winningCount.length}
+              </div>
             </div>
-          </div>
 
-          <div className="stat place-items-center">
-            <div className="stat-title">Pending</div>
-            <div className="stat-value text-secondary flex items-center gap-1">
-              <MdWatchLater /> {pending.length}
+            <div className="stat place-items-center">
+              <div className="stat-title">Pending</div>
+              <div className="stat-value text-secondary flex items-center gap-1">
+                <MdWatchLater /> {pending.length}
+              </div>
             </div>
-          </div>
 
-          <div className="stat place-items-center">
-            <div className="stat-title">Win In</div>
-            <div className="stat-value flex items-center gap-1 text-amber-500">
-              <FaCrown /> {winning.length}
+            <div className="stat place-items-center">
+              <div className="stat-title">Win In</div>
+              <div className="stat-value flex items-center gap-1 text-amber-500">
+                <FaCrown /> {winning.length}
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      {/* chart */}
-      <div>
-        <BarChart
-          width={500}
-          height={300}
-          data={data}
-          margin={{
-            top: 20,
-            right: 30,
-            left: 20,
-            bottom: 5,
-          }}
-        >
-          <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="name" />
-          <YAxis />
-          <Bar
-            dataKey="value"
-            fill="#8884d8"
-            shape={<TriangleBar />}
-            label={{ position: "top" }}
+        {/* chart */}
+        <div>
+          <BarChart
+            width={480}
+            height={300}
+            data={data}
+            margin={{
+              top: 20,
+              right: 30,
+              left: 20,
+              bottom: 5,
+            }}
           >
-            {data.map((entry, index) => (
-              <Cell key={`cell-${index}`} fill={colors[index % 2]} />
-            ))}
-          </Bar>
-        </BarChart>
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey="name" />
+            <YAxis />
+            <Bar
+              dataKey="value"
+              fill="#8884d8"
+              shape={<TriangleBar />}
+              label={{ position: "top" }}
+            >
+              {data.map((entry, index) => (
+                <Cell key={`cell-${index}`} fill={colors[index % 2]} />
+              ))}
+            </Bar>
+          </BarChart>
+        </div>
+      </div>
+      <div>
+        <h1 className="text-3xl font-bold text-gray-700 text-center my-8">All Of Your Achievement</h1>
+        <div className="overflow-x-auto">
+          <table className="table min-w-[800px]">
+            {/* head */}
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Contest</th>
+                <th>Creator</th>
+                <th>Attend In</th>
+              </tr>
+            </thead>
+            <tbody>
+              {winning.map((win, idx) => (
+                <tr key={win._id}>
+                  <th>{idx + 1}</th>
+                  <td>
+                    <div className="flex items-center gap-3">
+                      <div className="avatar">
+                        <div className="mask mask-squircle w-12 h-12">
+                          <img src={win?.contestImage} alt="Avatar" />
+                        </div>
+                      </div>
+                      <div>
+                        <div className="font-bold">{win?.contestName}</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    {win?.creatorName}
+                    <br />
+                    <span className="badge badge-ghost badge-sm">
+                      {win?.creatorEmail}
+                    </span>
+                  </td>
+                  <td>{win?.date}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   );
