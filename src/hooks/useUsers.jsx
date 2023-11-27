@@ -10,7 +10,7 @@ const useUsers = () => {
       return res.data;
     },
   });
-  return users;
+  return {users};
 };
 
 export default useUsers;

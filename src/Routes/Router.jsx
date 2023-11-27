@@ -18,6 +18,8 @@ import PrivateRoute from "../PrivateRoute/PrivateRoute";
 import MyParticipatedContest from "../Dashboard/Pages/MyParticipatedContest/MyParticipatedContest";
 import MyWinningContest from "../Dashboard/Pages/MyWinningContest/MyWinningContest";
 import Profile from "../Dashboard/Pages/Profile/Profile";
+import Admin from "./Admin";
+import Creator from "./Creator";
 
 const Router = createBrowserRouter([
   {
@@ -74,7 +76,9 @@ const Router = createBrowserRouter([
         path: "manageUsers",
         element: (
           <PrivateRoute>
-            <ManageUsers />
+            <Admin>
+              <ManageUsers />
+            </Admin>
           </PrivateRoute>
         ),
       },
@@ -82,7 +86,9 @@ const Router = createBrowserRouter([
         path: "manageContest",
         element: (
           <PrivateRoute>
-            <ManageContest />
+            <Admin>
+              <ManageContest />
+            </Admin>
           </PrivateRoute>
         ),
       },
@@ -92,7 +98,9 @@ const Router = createBrowserRouter([
         path: "addContest",
         element: (
           <PrivateRoute>
-            <AddContest></AddContest>
+            <Creator>
+              <AddContest></AddContest>
+            </Creator>
           </PrivateRoute>
         ),
       },
@@ -100,7 +108,9 @@ const Router = createBrowserRouter([
         path: "myContest",
         element: (
           <PrivateRoute>
-            <MyContest></MyContest>
+            <Creator>
+              <MyContest></MyContest>
+            </Creator>
           </PrivateRoute>
         ),
       },
@@ -108,7 +118,9 @@ const Router = createBrowserRouter([
         path: "updateContest/:id",
         element: (
           <PrivateRoute>
-            <UpdateContest />
+            <Creator>
+              <UpdateContest />
+            </Creator>
           </PrivateRoute>
         ),
         loader: ({ params }) =>
@@ -118,7 +130,9 @@ const Router = createBrowserRouter([
         path: "submittedContest",
         element: (
           <PrivateRoute>
-            <ContestSubmission></ContestSubmission>
+            <Creator>
+              <ContestSubmission></ContestSubmission>
+            </Creator>
           </PrivateRoute>
         ),
       },
@@ -142,7 +156,11 @@ const Router = createBrowserRouter([
       },
       {
         path: "profile",
-        element: <Profile />,
+        element: (
+          <PrivateRoute>
+            <Profile />
+          </PrivateRoute>
+        ),
       },
     ],
   },

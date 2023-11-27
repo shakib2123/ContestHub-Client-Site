@@ -5,7 +5,7 @@ import useAuth from "./useAuth";
 const useSingleUser = () => {
   const axiosSecure = useAxios();
   const { user, loader } = useAuth();
-  const { data: userData } = useQuery({
+  const { data: userData, isLoading } = useQuery({
     enabled: !loader,
     queryKey: ["singleUser"],
     queryFn: async () => {
@@ -13,7 +13,7 @@ const useSingleUser = () => {
       return res.data;
     },
   });
-  return userData;
+  return { userData, isLoading };
 };
 
 export default useSingleUser;

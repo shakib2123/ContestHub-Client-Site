@@ -17,8 +17,8 @@ const MyParticipatedContest = () => {
             key={payment._id}
             className="card w-full bg-base-100 shadow-xl"
           >
-            <figure>
-              <img src={payment?.contestImage} alt="img" />
+            <figure className="h-64 w-full">
+              <img className="w-full object-cover" src={payment?.contestImage} alt="img" />
             </figure>
             <div className="card-body">
               <h2 className="card-title">{payment?.contestName}</h2>

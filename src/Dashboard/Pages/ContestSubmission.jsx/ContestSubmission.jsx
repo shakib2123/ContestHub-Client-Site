@@ -62,7 +62,7 @@ const ContestSubmission = () => {
         </h2>
       </div>
       <div className="overflow-x-auto">
-        <table className="table min-w-[900px]">
+        <table className="table min-w-[1000px]">
           <thead className="bg-purple-500 text-gray-50">
             <tr>
               <th>#</th>

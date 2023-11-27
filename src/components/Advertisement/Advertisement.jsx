@@ -12,7 +12,7 @@ const Advertisement = () => {
   });
 
   return (
-    <div className="max-w-7xl mt-16 mx-auto mb-16 p-3">
+    <div className="max-w-6xl mt-16 mx-auto mb-16 p-3">
       <div className="mb-10 max-w-2xl mx-auto text-center">
         <h1 className="text-3xl font-bold mb-3 text-gray-700">
           Latest winner in different contest we found !

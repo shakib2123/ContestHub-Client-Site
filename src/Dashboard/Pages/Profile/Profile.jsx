@@ -9,12 +9,10 @@ const Profile = () => {
   const winning = winningCount.filter((win) => win.status === "winner");
   const { user, profileUpdate } = useAuth();
 
-  const userData = useSingleUser();
-  console.log(userData);
-
+  const { userData } = useSingleUser();
   const data = [
-    { name: "Attempted", value: winningCount.length },
-    { name: "Win", value: winning.length },
+    { name: "Attempted", value: winningCount?.length||0 },
+    { name: "Win", value: winning?.length ||0},
   ];
   const COLORS = ["#00C49F", "#FF8042"];
   const RADIAN = Math.PI / 180;

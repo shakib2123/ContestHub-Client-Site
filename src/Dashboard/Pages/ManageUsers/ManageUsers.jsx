@@ -2,7 +2,7 @@ import useUsers from "../../../hooks/useUsers";
 import UserTable from "./UserTable";
 
 const ManageUsers = () => {
-  const users = useUsers();
+  const {users} = useUsers();
 
   return (
     <div className="max-w-7xl mx-auto">
