@@ -1,22 +1,9 @@
-import { useQuery } from "@tanstack/react-query";
-import useAxios from "../../../hooks/useAxios";
-import useAuth from "../../../hooks/useAuth";
 import { MdDoNotDisturbOnTotalSilence, MdWatchLater } from "react-icons/md";
 import { FaCrown } from "react-icons/fa6";
 import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid } from "recharts";
+import useWinnerData from "../../../hooks/useWinnerData";
 const MyWinningContest = () => {
-  const axiosSecure = useAxios();
-  const { user, loader } = useAuth();
-
-  const { data: winningCount = [] } = useQuery({
-    enabled: !loader,
-    queryKey: ["winningCount"],
-    queryFn: async () => {
-      const res = await axiosSecure.get(`/payments/${user?.email}`);
-      return res.data;
-    },
-  });
-  console.log(winningCount);
+  const { winningCount } = useWinnerData();
   const pending = winningCount.filter((win) => win.status === "pending");
   const winning = winningCount.filter((win) => win.status === "winner");
 
@@ -99,7 +86,9 @@ const MyWinningContest = () => {
         </div>
       </div>
       <div>
-        <h1 className="text-3xl font-bold text-gray-700 text-center my-8">All Of Your Achievement</h1>
+        <h1 className="text-3xl font-bold text-gray-700 text-center my-8">
+          All Of Your Achievement
+        </h1>
         <div className="overflow-x-auto">
           <table className="table min-w-[800px]">
             {/* head */}

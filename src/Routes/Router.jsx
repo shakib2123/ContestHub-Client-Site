@@ -17,6 +17,7 @@ import Payment from "../Dashboard/Pages/Payment/Payment";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
 import MyParticipatedContest from "../Dashboard/Pages/MyParticipatedContest/MyParticipatedContest";
 import MyWinningContest from "../Dashboard/Pages/MyWinningContest/MyWinningContest";
+import Profile from "../Dashboard/Pages/Profile/Profile";
 
 const Router = createBrowserRouter([
   {
@@ -62,46 +63,86 @@ const Router = createBrowserRouter([
   // dashboard routes
   {
     path: "/dashboard",
-    element: <Dashboard></Dashboard>,
+    element: (
+      <PrivateRoute>
+        <Dashboard></Dashboard>
+      </PrivateRoute>
+    ),
     children: [
       // admin routes
       {
         path: "manageUsers",
-        element: <ManageUsers />,
+        element: (
+          <PrivateRoute>
+            <ManageUsers />
+          </PrivateRoute>
+        ),
       },
       {
         path: "manageContest",
-        element: <ManageContest />,
+        element: (
+          <PrivateRoute>
+            <ManageContest />
+          </PrivateRoute>
+        ),
       },
 
       // creator routes
       {
         path: "addContest",
-        element: <AddContest></AddContest>,
+        element: (
+          <PrivateRoute>
+            <AddContest></AddContest>
+          </PrivateRoute>
+        ),
       },
       {
         path: "myContest",
-        element: <MyContest></MyContest>,
+        element: (
+          <PrivateRoute>
+            <MyContest></MyContest>
+          </PrivateRoute>
+        ),
       },
       {
         path: "updateContest/:id",
-        element: <UpdateContest />,
+        element: (
+          <PrivateRoute>
+            <UpdateContest />
+          </PrivateRoute>
+        ),
         loader: ({ params }) =>
           fetch(`http://localhost:5000/contests/${params.id}`),
       },
       {
         path: "submittedContest",
-        element: <ContestSubmission></ContestSubmission>,
+        element: (
+          <PrivateRoute>
+            <ContestSubmission></ContestSubmission>
+          </PrivateRoute>
+        ),
       },
 
       // guest routes
       {
         path: "myParticipatedContest",
-        element: <MyParticipatedContest></MyParticipatedContest>,
+        element: (
+          <PrivateRoute>
+            <MyParticipatedContest></MyParticipatedContest>
+          </PrivateRoute>
+        ),
       },
       {
         path: "myWinningContest",
-        element: <MyWinningContest></MyWinningContest>,
+        element: (
+          <PrivateRoute>
+            <MyWinningContest></MyWinningContest>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "profile",
+        element: <Profile />,
       },
     ],
   },

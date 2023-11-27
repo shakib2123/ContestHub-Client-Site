@@ -17,9 +17,10 @@ import useAxios from "../../hooks/useAxios";
 import useAuth from "../../hooks/useAuth";
 import { useQuery } from "@tanstack/react-query";
 import GuestMenu from "../Menu/GuestMenu";
+import toast from "react-hot-toast";
 
 const Sidebar = () => {
-  const { user, loader } = useAuth();
+  const { user, loader, logOut } = useAuth();
   const [isActive, setActive] = useState(true);
   const axiosSecure = useAxios();
   const { data: userData } = useQuery({
@@ -35,10 +36,15 @@ const Sidebar = () => {
   const handleToggle = () => {
     setActive(!isActive);
   };
+  const handleLogout = () => {
+    logOut().then(() => {
+      toast.success("logout successfully!");
+    });
+  };
   return (
     <>
       {/* Small Screen Navbar */}
-      <div className="bg-gray-100 text-gray-800 flex justify-between md:hidden">
+      <div className="bg-gray-100 z-50 text-gray-800 flex justify-between md:hidden">
         <div>
           <div className="block cursor-pointer p-4 font-bold">
             <Logo></Logo>
@@ -54,7 +60,7 @@ const Sidebar = () => {
       </div>
       {/* Sidebar */}
       <div
-        className={`z-10 md:fixed flex flex-col justify-between overflow-x-hidden bg-gray-100 w-64 space-y-6 px-2 py-4 absolute inset-y-0 left-0 transform ${
+        className={`z-40 md:fixed flex flex-col justify-between overflow-x-hidden bg-gray-100 w-64 space-y-6 px-2 py-4 absolute inset-y-0 left-0 transform ${
           isActive && "-translate-x-full"
         }  md:translate-x-0  transition duration-200 ease-in-out`}
       >
@@ -73,7 +79,10 @@ const Sidebar = () => {
             label="Profile"
             address="/dashboard/profile"
           />
-          <button className="flex w-full items-center px-4 py-2 mt-5 text-gray-600 hover:bg-gray-300   hover:text-gray-700 transition-colors duration-300 transform">
+          <button
+            onClick={handleLogout}
+            className="flex w-full items-center px-4 py-2 mt-5 text-gray-600 hover:bg-gray-300   hover:text-gray-700 transition-colors duration-300 transform"
+          >
             <GrLogout className="w-5 h-5" />
 
             <span className="mx-4 font-medium">Logout</span>

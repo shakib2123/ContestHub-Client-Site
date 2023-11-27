@@ -1,6 +1,6 @@
 import useAuth from "../../hooks/useAuth";
 
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import useAxios from "../../hooks/useAxios";
 import toast from "react-hot-toast";
 
@@ -8,6 +8,7 @@ const Social = () => {
   const { googleLogin } = useAuth();
   const axiosSecure = useAxios();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleGoogleSignIn = () => {
     googleLogin().then((result) => {
@@ -19,8 +20,11 @@ const Social = () => {
       };
 
       axiosSecure.post("/users", userInfo).then((res) => {
-        console.log(res.data);
-        navigate("/");
+        navigate(
+          location?.state?.from?.pathname
+            ? location?.state?.from?.pathname
+            : "/"
+        );
         toast.success("sign up successfully!");
       });
     });
