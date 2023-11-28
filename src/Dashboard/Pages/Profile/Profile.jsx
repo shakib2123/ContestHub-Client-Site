@@ -3,8 +3,16 @@ import useWinnerData from "../../../hooks/useWinnerData";
 import useAuth from "../../../hooks/useAuth";
 import toast from "react-hot-toast";
 import useSingleUser from "../../../hooks/useSingleUser";
-
-const Profile = () => {
+import AOS from "aos";
+import { useEffect } from "react";
+const Profile = () =>
+{
+  useEffect(() => {
+    AOS.init({
+      duration: 1000,
+      delay: 300,
+    });
+  }, []);
   const { winningCount } = useWinnerData();
   const winning = winningCount.filter((win) => win.status === "winner");
   const { user, profileUpdate } = useAuth();
@@ -62,7 +70,10 @@ const Profile = () => {
       <div className="flex flex-col lg:flex-row gap-8 justify-center items-center">
         {userData?.role === "guest" && (
           <div>
-            <h1 className="text-3xl text-blue-600 font-bold text-center mb-4">
+            <h1
+              data-aos="zoom-in-up"
+              className="text-3xl text-blue-600 font-bold text-center mb-4"
+            >
               Your <span className="text-amber-500">Winning</span> Percentage!!
             </h1>
             <PieChart width={400} height={400}>
@@ -88,19 +99,30 @@ const Profile = () => {
           </div>
         )}
         <div className="w-96 mx-auto relative overflow-hidden z-10 bg-gray-800 p-8 rounded-lg shadow-md before:w-24 before:h-24 before:absolute before:bg-purple-600 before:rounded-full before:-z-10 before:blur-2xl after:w-32 after:h-32 after:absolute after:bg-sky-400 after:rounded-full after:-z-10 after:blur-xl after:top-24 after:-right-12 ">
-          <h2 className="text-2xl font-bold text-white mb-6 text-center">
+          <h2
+            data-aos="zoom-in-up"
+            className="text-2xl font-bold text-white mb-6 text-center"
+          >
             Update Your Profile
           </h2>
           <figure className="flex justify-center items-center">
-            <img className="mask mask-circle w-44" src={user?.photoURL} />
+            <img
+              data-aos="zoom-in-up"
+              className="mask mask-circle w-44"
+              src={user?.photoURL}
+            />
           </figure>
 
           <form onSubmit={handleProfileUpdate}>
             <div className="mb-4">
-              <label className="block text-sm font-medium text-gray-300">
+              <label
+                data-aos="zoom-in-up"
+                className="block text-sm font-medium text-gray-300"
+              >
                 Full Name
               </label>
               <input
+                data-aos="zoom-in-up"
                 className="mt-1 p-2 w-full bg-gray-700 border border-gray-600 rounded-md text-white"
                 type="text"
                 name="name"
@@ -109,10 +131,14 @@ const Profile = () => {
             </div>
 
             <div className="mb-4">
-              <label className="block text-sm font-medium text-gray-300">
+              <label
+                data-aos="zoom-in-up"
+                className="block text-sm font-medium text-gray-300"
+              >
                 Photo URL
               </label>
               <input
+                data-aos="zoom-in-up"
                 className="mt-1 p-2 w-full bg-gray-700 border border-gray-600 rounded-md text-white"
                 name="photo"
                 type="text"
@@ -121,6 +147,7 @@ const Profile = () => {
             </div>
             <div className="flex justify-end">
               <button
+             
                 className="bg-gradient-to-r from-purple-600 via-purple-400 to-blue-500 text-white px-4 py-2 font-bold rounded-md hover:opacity-80"
                 type="submit"
               >

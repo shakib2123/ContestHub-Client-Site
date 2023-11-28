@@ -22,6 +22,7 @@ import Admin from "./Admin";
 import Creator from "./Creator";
 import LeaderBoard from "../Pages/LeaderBoard/LeaderBoard";
 import ParticipationProgress from "../Pages/ParticipationProgress/ParticipationProgress";
+import About from "../Pages/About/About";
 
 const Router = createBrowserRouter([
   {
@@ -56,10 +57,15 @@ const Router = createBrowserRouter([
       {
         path: "leaderBoard",
         element: <LeaderBoard />,
-      }, {
-        path: 'progress',
-        element:<ParticipationProgress/>
-      }
+      },
+      {
+        path: "progress",
+        element: <ParticipationProgress />,
+      },
+      {
+        path: "about",
+        element: <About></About>,
+      },
     ],
   },
   {

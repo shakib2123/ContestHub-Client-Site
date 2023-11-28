@@ -19,7 +19,7 @@ const ContestDetails = () => {
 
     setTotalDays(daysDifference);
   }, [dateString]);
-  console.log(totalDays);
+  console.log(contest);
 
   return (
     <div className="flex justify-center items-center min-h-screen">
@@ -45,8 +45,12 @@ const ContestDetails = () => {
                   </div>
                   <div className="flex text-red-600 m-2">
                     <div className="m-1 font-bold">Deadline:</div>
-                    <div className="m-1">
-                      <Timer duration={totalDays * 24 * 60 * 60 * 1000} />
+                    <div className="m-1 text-yellow-500">
+                      {contest?.winnerEmail ? (
+                        <p className="text-lg text-red-600">Contest Closed</p>
+                      ) : (
+                        <Timer duration={totalDays * 24 * 60 * 60 * 1000} />
+                      )}
                     </div>
                   </div>
                   <div className="flex text-green-600 text-sm m-2">
@@ -57,7 +61,7 @@ const ContestDetails = () => {
                     <p>{contest.description}</p>
                   </div>
                   <div className="divider"></div>
-                  {contest.winnerName && (
+                  {contest?.winnerEmail && (
                     <div className="flex cursor-pointer mt-5">
                       <div className="avatar indicator">
                         <span className="indicator-item badge badge-neutral">
@@ -77,13 +81,13 @@ const ContestDetails = () => {
                   )}
                   {contest.winnerName && <div className="divider"></div>}
 
-                  {totalDays <= 0 ? (
+                  {totalDays <= 0 || contest?.winnerEmail ? (
                     <button
                       disabled
                       className="btn btn-block btn-neutral text-lg"
                     >
                       <BsFillPinAngleFill className="text-2xl" />
-                      Deadline is over
+                      Not available
                     </button>
                   ) : (
                     <Link to={`/payment/${contest._id}`}>

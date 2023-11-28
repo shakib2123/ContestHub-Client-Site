@@ -5,20 +5,18 @@ import errorAnime from "../../assets/ErrorPageAnime.json";
 import { AiOutlineDoubleRight } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import AOS from "aos";
-import "aos/dist/aos.css";
+
 import { useEffect } from "react";
-const ErrorPage = () =>
-{
-     useEffect(() => {
-       AOS.init({
-         duration: 1000,
-         delay: 300,
-       });
-     }, []);
+const ErrorPage = () => {
+  useEffect(() => {
+    AOS.init({
+      duration: 1000,
+      delay: 300,
+    });
+  }, []);
   return (
     <div className="flex items-center justify-center h-screen">
       <div className="flex flex-col md:flex-row w-[70%] items-center space-y-4">
-        
         <div
           data-aos="zoom-in-up"
           className="flex-col space-y-4 text-center md:w-1/2 w-[80%]"
@@ -31,7 +29,7 @@ const ErrorPage = () =>
           </div>
           <div
             data-aos="zoom-in-up"
-            className="flex items-center justify-center"
+            className="flex flex-col gap-3 items-center justify-center"
           >
             <Link to="/">
               <motion.button
@@ -40,6 +38,16 @@ const ErrorPage = () =>
                 className="bg-pink-600 px-4 py-1 text-white font-medium rounded-lg cursor-pointer flex items-center"
               >
                 Visit Homepage <AiOutlineDoubleRight />
+              </motion.button>
+            </Link>
+
+            <Link to={-1}>
+              <motion.button
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+                className="bg-pink-600 px-4 py-1 text-white font-medium rounded-lg cursor-pointer flex items-center"
+              >
+                Go Back <AiOutlineDoubleRight />
               </motion.button>
             </Link>
           </div>

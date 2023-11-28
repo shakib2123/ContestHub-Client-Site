@@ -3,9 +3,17 @@ import useAxios from "../../hooks/useAxios";
 import Contest from "./Contest";
 import { FaBriefcase, FaFirstAid, FaGamepad } from "react-icons/fa";
 import { FaFilePen } from "react-icons/fa6";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BallTriangle } from "react-loader-spinner";
-const AllContest = () => {
+import AOS from "aos";
+const AllContest = () =>
+{
+  useEffect(() => {
+    AOS.init({
+      duration: 1000,
+      delay: 300,
+    });
+  }, []);
   const axiosSecure = useAxios();
   const [category, setCategory] = useState("");
   const handleClick = (type) => {
@@ -68,6 +76,7 @@ const AllContest = () => {
     <div className="max-w-7xl mx-auto">
       <div className="flex gap-4 justify-center items-center overflow-auto px-4">
         <div
+          data-aos="zoom-in-up"
           onClick={() => handleClick("Business Contest")}
           className={`flex flex-col  items-center justify-center gap-2 p-3 hover:text-neutral-800 transition cursor-pointer ${
             category === "Business Contest"
@@ -79,6 +88,7 @@ const AllContest = () => {
           <p className="text-sm font-medium">Business Contest</p>
         </div>
         <div
+          data-aos="zoom-in-up"
           onClick={() => handleClick("Medical Contest")}
           className={`flex flex-col  items-center justify-center gap-2 p-3 hover:text-neutral-800 transition cursor-pointer ${
             category === "Medical Contest"
@@ -90,6 +100,7 @@ const AllContest = () => {
           <p className="text-sm font-medium">Medical Contest</p>
         </div>
         <div
+          data-aos="zoom-in-up"
           onClick={() => handleClick("Article Writing")}
           className={`flex flex-col  items-center justify-center gap-2 p-3 hover:text-neutral-800 transition cursor-pointer ${
             category === "Article Writing"
@@ -101,6 +112,7 @@ const AllContest = () => {
           <p className="text-sm font-medium">Article Writing</p>
         </div>
         <div
+          data-aos="zoom-in-up"
           onClick={() => handleClick("Gaming")}
           className={`flex flex-col  items-center justify-center gap-2 p-3 hover:text-neutral-800 transition cursor-pointer ${
             category === "Gaming"
@@ -120,10 +132,16 @@ const AllContest = () => {
       </div>
       <div className="flex justify-between my-6 items-center p-2 mx-3 rounded-xl shadow-lg">
         <div>
-          <h2 className="text-xl font-bold text-gray-700">Page {page} Out Of {pageOfNum.length}</h2>
+          <h2 data-aos="zoom-in-up" className="text-xl font-bold text-gray-700">
+            Page {page} Out Of {pageOfNum.length}
+          </h2>
         </div>
         <div className="join rounded-lg">
-          <button onClick={handlePrev} className="join-item btn">
+          <button
+            data-aos="zoom-in-up"
+            onClick={handlePrev}
+            className="join-item btn"
+          >
             «
           </button>
           {pageOfNum.map((item, index) => {
@@ -131,6 +149,7 @@ const AllContest = () => {
             return (
               <button
                 key={pageNum}
+                data-aos="zoom-in-up"
                 onClick={() => setPage(pageNum)}
                 className={
                   page === pageNum
@@ -142,7 +161,11 @@ const AllContest = () => {
               </button>
             );
           })}
-          <button onClick={handleNext} className="join-item btn">
+          <button
+            data-aos="zoom-in-up"
+            onClick={handleNext}
+            className="join-item btn"
+          >
             »
           </button>
         </div>

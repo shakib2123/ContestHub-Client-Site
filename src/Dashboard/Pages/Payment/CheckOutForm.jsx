@@ -4,8 +4,11 @@ import Swal from "sweetalert2";
 import useAxios from "../../../hooks/useAxios";
 import useAuth from "../../../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
+import useWinnerData from "../../../hooks/useWinnerData";
 
 const CheckoutForm = ({ loadedContest }) => {
+  const { winningCount } = useWinnerData();
+
   const stripe = useStripe();
   const elements = useElements();
   const axiosSecure = useAxios();
@@ -106,6 +109,11 @@ const CheckoutForm = ({ loadedContest }) => {
       }
     }
   };
+
+  const isExist = winningCount.filter(
+    (win) => win?.contestId === loadedContest._id
+  );
+
   return (
     <div className="max-w-7xl mx-auto flex justify-center items-center min-h-[calc(100vh-150px)] p-4 md:p-10">
       <div className=" p-4 max-w-xl min-w-[405px] border-2 border-gray-500 bg-gray-100 rounded-2xl">
@@ -147,13 +155,19 @@ const CheckoutForm = ({ loadedContest }) => {
             }}
           />
 
-          <button
-            className="btn btn-primary my-8 font-bold btn-block"
-            type="submit"
-            disabled={!stripe || !clientSecret}
-          >
-            PAY ${loadedContest.price}
-          </button>
+          {isExist.length > 0 ? (
+            <button disabled className="btn btn-block ">
+              Already Submitted
+            </button>
+          ) : (
+            <button
+              className="btn btn-primary my-8 font-bold btn-block"
+              type="submit"
+              disabled={!stripe || !clientSecret}
+            >
+              PAY ${loadedContest.price}
+            </button>
+          )}
         </form>
         <p className="text-red-600 text-xl">{error}</p>
         {transactionId && (

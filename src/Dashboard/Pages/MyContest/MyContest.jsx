@@ -6,7 +6,16 @@ import { MdDelete, MdOutlineVerified, MdWatchLater } from "react-icons/md";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 import { BallTriangle } from "react-loader-spinner";
-const MyContest = () => {
+import AOS from "aos";
+import { useEffect } from "react";
+const MyContest = () =>
+{
+  useEffect(() => {
+    AOS.init({
+      duration: 1000,
+      delay: 300,
+    });
+  }, []);
   const axiosSecure = useAxios();
   const { user, loader } = useAuth();
   const {
@@ -78,12 +87,12 @@ const MyContest = () => {
         {/* head */}
         <thead>
           <tr>
-            <th>#</th>
-            <th>Contest Name & Count</th>
-            <th>Prize Money</th>
-            <th>Status</th>
-            <th>Action</th>
-            <th>Select Winner</th>
+            <th data-aos="zoom-in-up">#</th>
+            <th data-aos="zoom-in-up">Contest Name & Count</th>
+            <th data-aos="zoom-in-up">Prize Money</th>
+            <th data-aos="zoom-in-up">Status</th>
+            <th data-aos="zoom-in-up">Action</th>
+            <th data-aos="zoom-in-up">Select Winner</th>
           </tr>
         </thead>
         <tbody>
@@ -105,7 +114,7 @@ const MyContest = () => {
                   </div>
                 </div>
               </td>
-              <td>
+              <td >
                 Prize Money: ${contest.prize}
                 <br />
                 {contest.winnerName && (
@@ -116,11 +125,17 @@ const MyContest = () => {
               </td>
               <td>
                 {contest.status === "Accepted" ? (
-                  <span className="text-green-500 bg-blue-100 p-1 w-fit rounded-lg  font-medium flex items-center gap-1">
+                  <span
+             
+                    className="text-green-500 bg-blue-100 p-1 w-fit rounded-lg  font-medium flex items-center gap-1"
+                  >
                     <MdOutlineVerified /> {contest?.status}
                   </span>
                 ) : (
-                  <span className="text-red-500 bg-yellow-100 p-1 w-fit rounded-lg  font-medium flex items-center gap-1">
+                  <span
+              
+                    className="text-red-500 bg-yellow-100 p-1 w-fit rounded-lg  font-medium flex items-center gap-1"
+                  >
                     <MdWatchLater /> {contest?.status}
                   </span>
                 )}
@@ -128,6 +143,7 @@ const MyContest = () => {
               <th>
                 <Link to={`/dashboard/updateContest/${contest?._id}`}>
                   <button
+                   
                     disabled={contest.status === "Accepted"}
                     className="btn bg-blue-300 btn-xs"
                   >
@@ -136,6 +152,7 @@ const MyContest = () => {
                 </Link>
                 <br />
                 <button
+              
                   onClick={() => handleDelete(contest._id)}
                   disabled={contest.status === "Accepted"}
                   className="btn bg-red-300 btn-xs mt-2"
@@ -146,7 +163,10 @@ const MyContest = () => {
               </th>
               <th>
                 <Link to="/dashboard/submittedContest">
-                  <button className="btn btn-ghost bg-green-300 btn-xs">
+                  <button
+                  
+                    className="btn btn-ghost bg-green-300 btn-xs"
+                  >
                     See submission
                   </button>
                 </Link>

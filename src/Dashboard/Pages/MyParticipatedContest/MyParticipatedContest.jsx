@@ -1,18 +1,32 @@
+import { useEffect } from "react";
 import usePayments from "../../../hooks/usePayments";
-
-const MyParticipatedContest = () => {
+import AOS from "aos";
+const MyParticipatedContest = () =>
+{
+  useEffect(() => {
+    AOS.init({
+      duration: 1000,
+      delay: 300,
+    });
+  }, []);
   const { payments } = usePayments();
 
   return (
     <div>
       <div className="navbar bg-base-100 mb-10">
         <div className="flex-1">
-          <h2 className="lg:text-xl font-bold text-center text-red-500">
+          <h2
+            data-aos="zoom-in-up"
+            className="lg:text-xl font-bold text-center text-red-500"
+          >
             My participated contests!!
           </h2>
         </div>
         <div className="flex-none">
-          <button className="p-2 bg-teal-600 text-gray-100 font-medium rounded-full">
+          <button
+            data-aos="zoom-in-up"
+            className="p-2 bg-teal-600 text-gray-100 font-medium rounded-full"
+          >
             Upcoming Contest
           </button>
         </div>
@@ -27,15 +41,20 @@ const MyParticipatedContest = () => {
           >
             <figure className="h-64 w-full">
               <img
+                data-aos="zoom-in-up"
                 className="w-full object-cover"
                 src={payment?.contestImage}
                 alt="img"
               />
             </figure>
             <div className="card-body">
-              <h2 className="card-title">{payment?.contestName}</h2>
-              <p>Deadline: {payment?.deadline}</p>
-              <p className="text-sm">Attend In: {payment?.date}</p>
+              <h2 data-aos="zoom-in-up" className="card-title">
+                {payment?.contestName}
+              </h2>
+              <p data-aos="zoom-in-up">Deadline: {payment?.deadline}</p>
+              <p data-aos="zoom-in-up" className="text-sm">
+                Attend In: {payment?.date}
+              </p>
             </div>
           </div>
         ))}
