@@ -4,27 +4,65 @@ import Contest from "./Contest";
 import { FaBriefcase, FaFirstAid, FaGamepad } from "react-icons/fa";
 import { FaFilePen } from "react-icons/fa6";
 import { useState } from "react";
+import { BallTriangle } from "react-loader-spinner";
 const AllContest = () => {
   const axiosSecure = useAxios();
   const [category, setCategory] = useState("");
   const handleClick = (type) => {
     setCategory(type);
   };
+  const [page, setPage] = useState(1);
+  const limit = 10;
 
   const {
-    data: allContest = [],
+    data = [],
     isLoading,
     isError,
   } = useQuery({
-    queryKey: ["allContest", category],
+    queryKey: ["allContest", category, page],
     queryFn: async () => {
       const res = await axiosSecure.get(
-        `/contests?category=${category}&status=Accepted`
+        `/contests?category=${category}&status=Accepted&page=${page}&limit=${limit}`
       );
-      return res.data;
+      return res?.data;
     },
   });
-  console.log(allContest.length);
+
+  if (isLoading) {
+    return (
+      <div className="flex justify-center items-center min-h-[calc(100vh-200px)]">
+        <BallTriangle
+          height={100}
+          width={100}
+          radius={5}
+          color="#4fa94d"
+          ariaLabel="ball-triangle-loading"
+          wrapperClass={{}}
+          wrapperStyle=""
+          visible={true}
+        />
+      </div>
+    );
+  }
+
+  if (isError) {
+    return <div>{isError.message}</div>;
+  }
+
+  const totalContest = data?.contestCount;
+  const pages = Math?.ceil(totalContest / limit);
+  const pageOfNum = [...Array(pages).fill(0)];
+
+  const handlePrev = () => {
+    if (page > 1) {
+      setPage(page - 1);
+    }
+  };
+  const handleNext = () => {
+    if (page < pages) {
+      setPage(page + 1);
+    }
+  };
 
   return (
     <div className="max-w-7xl mx-auto">
@@ -76,9 +114,35 @@ const AllContest = () => {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 mb-8 gap-4 px-2">
-        {allContest.map((contest) => (
+        {data?.allContest?.map((contest) => (
           <Contest key={contest._id} contest={contest}></Contest>
         ))}
+      </div>
+      <div>
+        <div className="join rounded-lg">
+          <button onClick={handlePrev} className="join-item btn">
+            «
+          </button>
+          {pageOfNum.map((item, index) => {
+            const pageNum = index + 1;
+            return (
+              <button
+                key={pageNum}
+                onClick={() => setPage(pageNum)}
+                className={
+                  page === pageNum
+                    ? "join-item btn btn-active"
+                    : "join-item btn"
+                }
+              >
+                {pageNum}
+              </button>
+            );
+          })}
+          <button onClick={handleNext} className="join-item btn">
+            »
+          </button>
+        </div>
       </div>
     </div>
   );
