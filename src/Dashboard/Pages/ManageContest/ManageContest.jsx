@@ -20,7 +20,7 @@ const ManageContest = () => {
             </tr>
           </thead>
           <tbody>
-            {contests.map((contest, index) => (
+            {contests?.allContest?.map((contest, index) => (
               <ManageContestTable
                 key={contest._id}
                 contest={contest}

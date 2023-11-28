@@ -118,7 +118,10 @@ const AllContest = () => {
           <Contest key={contest._id} contest={contest}></Contest>
         ))}
       </div>
-      <div>
+      <div className="flex justify-between my-6 items-center p-2 mx-3 rounded-xl shadow-lg">
+        <div>
+          <h2 className="text-xl font-bold text-gray-700">Page {page} Out Of {pageOfNum.length}</h2>
+        </div>
         <div className="join rounded-lg">
           <button onClick={handlePrev} className="join-item btn">
             «

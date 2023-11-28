@@ -4,7 +4,7 @@ import useAxios from "./useAxios";
 const useContest = () =>
 {
     const axiosSecure = useAxios();
-    const { data: contests = [] , refetch} = useQuery({
+    const { data: contests = [] , refetch, isLoading} = useQuery({
         queryKey: ['contests'],
         queryFn: async() =>
         {
@@ -12,7 +12,7 @@ const useContest = () =>
             return res.data;
         }
     })
-    return {contests, refetch};
+    return {contests, refetch, isLoading};
 };
 
 export default useContest;

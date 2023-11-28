@@ -21,6 +21,7 @@ import Profile from "../Dashboard/Pages/Profile/Profile";
 import Admin from "./Admin";
 import Creator from "./Creator";
 import LeaderBoard from "../Pages/LeaderBoard/LeaderBoard";
+import ParticipationProgress from "../Pages/ParticipationProgress/ParticipationProgress";
 
 const Router = createBrowserRouter([
   {
@@ -55,7 +56,10 @@ const Router = createBrowserRouter([
       {
         path: "leaderBoard",
         element: <LeaderBoard />,
-      },
+      }, {
+        path: 'progress',
+        element:<ParticipationProgress/>
+      }
     ],
   },
   {

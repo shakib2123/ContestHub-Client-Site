@@ -5,11 +5,12 @@ import { FaFilePen } from "react-icons/fa6";
 import { MdDelete, MdOutlineVerified, MdWatchLater } from "react-icons/md";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
+import { BallTriangle } from "react-loader-spinner";
 const MyContest = () => {
   const axiosSecure = useAxios();
   const { user, loader } = useAuth();
   const {
-    data: contests = [],
+    data,
     isLoading,
     isError,
     refetch,
@@ -18,9 +19,32 @@ const MyContest = () => {
     queryKey: ["myContests"],
     queryFn: async () => {
       const res = await axiosSecure.get(`/contests?email=${user?.email}`);
+      console.log(res.data); // Log the response to check its structure
       return res.data;
     },
   });
+
+  if (isLoading) {
+    return (
+      <div className="flex justify-center items-center min-h-[calc(100vh-200px)]">
+        <BallTriangle
+          height={100}
+          width={100}
+          radius={5}
+          color="#4fa94d"
+          ariaLabel="ball-triangle-loading"
+          wrapperClass={{}}
+          wrapperStyle=""
+          visible={true}
+        />
+      </div>
+    );
+  }
+
+  if (isError) {
+    return <div>{isError.message}</div>;
+  }
+
 
   const handleDelete = (id) => {
     Swal.fire({
@@ -63,7 +87,7 @@ const MyContest = () => {
           </tr>
         </thead>
         <tbody>
-          {contests.map((contest, index) => (
+          {data?.allContest?.map((contest, index) => (
             <tr key={contest._id}>
               <th>{index + 1}</th>
               <td>
