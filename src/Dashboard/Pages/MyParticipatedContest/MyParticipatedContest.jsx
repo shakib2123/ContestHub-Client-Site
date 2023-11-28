@@ -2,14 +2,22 @@ import usePayments from "../../../hooks/usePayments";
 
 const MyParticipatedContest = () => {
   const { payments } = usePayments();
-  console.log(payments);
+
   return (
     <div>
-      <div>
-        <h2 className="text-3xl font-bold text-center mb-8 text-red-500">
-          My participated contests!!
-        </h2>
+      <div className="navbar bg-base-100 mb-10">
+        <div className="flex-1">
+          <h2 className="lg:text-xl font-bold text-center text-red-500">
+            My participated contests!!
+          </h2>
+        </div>
+        <div className="flex-none">
+          <button className="p-2 bg-teal-600 text-gray-100 font-medium rounded-full">
+            Upcoming Contest
+          </button>
+        </div>
       </div>
+
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         {payments.map((payment) => (
           <div
@@ -18,7 +26,11 @@ const MyParticipatedContest = () => {
             className="card w-full bg-base-100 shadow-xl"
           >
             <figure className="h-64 w-full">
-              <img className="w-full object-cover" src={payment?.contestImage} alt="img" />
+              <img
+                className="w-full object-cover"
+                src={payment?.contestImage}
+                alt="img"
+              />
             </figure>
             <div className="card-body">
               <h2 className="card-title">{payment?.contestName}</h2>

@@ -25,7 +25,11 @@ const Timer = ({ duration }) => {
     let minutes = parseInt(total_minutes % 60);
     let hours = parseInt(total_hours % 24);
 
-    return `${days} Days : ${hours} Hours : ${minutes} Min : ${seconds} Sec`;
+    if (duration > 0) {
+      return `${days} Days : ${hours} Hours : ${minutes} Min : ${seconds} Sec`;
+    } else {
+      return `00 Days : 00 Hours : 00 Min : 00 Sec`;
+    }
   };
 
   return <div>{getFormattedTime()}</div>;

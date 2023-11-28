@@ -6,11 +6,6 @@ const CreatorMenu = () => {
   return (
     <div>
       <MenuItem
-        address="addContest"
-        label="Add Contest"
-        icon={MdCreateNewFolder}
-      />
-      <MenuItem
         address="myContest"
         label="My Created Contest"
         icon={MdBookmarkAdded}
@@ -19,6 +14,11 @@ const CreatorMenu = () => {
         address="submittedContest"
         label="Contest Submitted"
         icon={HiViewGridAdd}
+      />
+      <MenuItem
+        address="addContest"
+        label="Add Contest"
+        icon={MdCreateNewFolder}
       />
     </div>
   );

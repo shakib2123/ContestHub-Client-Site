@@ -20,6 +20,7 @@ import MyWinningContest from "../Dashboard/Pages/MyWinningContest/MyWinningConte
 import Profile from "../Dashboard/Pages/Profile/Profile";
 import Admin from "./Admin";
 import Creator from "./Creator";
+import LeaderBoard from "../Pages/LeaderBoard/LeaderBoard";
 
 const Router = createBrowserRouter([
   {
@@ -50,6 +51,10 @@ const Router = createBrowserRouter([
         ),
         loader: ({ params }) =>
           fetch(`http://localhost:5000/contests/${params.id}`),
+      },
+      {
+        path: "leaderBoard",
+        element: <LeaderBoard />,
       },
     ],
   },

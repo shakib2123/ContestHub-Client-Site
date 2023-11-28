@@ -4,9 +4,11 @@ import Logo from "../../components/Logo/Logo";
 import { Link, NavLink } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import toast from "react-hot-toast";
+import useSingleUser from "../../hooks/useSingleUser";
 const Navbar = () => {
   const { user, logOut } = useAuth();
-
+  const { userData, isLoading } = useSingleUser();
+  console.log(userData?.role);
   const handleLogout = () => {
     logOut()
       .then(() => {
@@ -58,18 +60,28 @@ const Navbar = () => {
                 className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52 space-y-3"
               >
                 <li className="ml-2 text-green-700">{user?.displayName}</li>
-                <li>
-                  <NavLink
-                    className={({ isActive }) =>
-                      isActive
-                        ? "md:text-[#e63946]  border border-[#e63946]"
-                        : "text-gray-800"
-                    }
-                    to="/dashboard"
-                  >
-                    <button>Dashboard</button>
-                  </NavLink>
-                </li>
+                {isLoading ? (
+                  <div>loading...</div>
+                ) : (
+                  <li>
+                    <NavLink
+                      className={({ isActive }) =>
+                        isActive
+                          ? "md:text-[#e63946]  border border-[#e63946]"
+                          : "text-gray-800"
+                      }
+                      to={
+                        (userData?.role === "guest" &&
+                          "/dashboard/myParticipatedContest") ||
+                        (userData?.role === "creator" &&
+                          "/dashboard/myContest") ||
+                        (userData?.role === "admin" && "/dashboard/manageUsers")
+                      }
+                    >
+                      <button>Dashboard</button>
+                    </NavLink>
+                  </li>
+                )}
                 <li>
                   <button
                     onClick={handleLogout}
