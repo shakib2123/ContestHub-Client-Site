@@ -14,7 +14,7 @@ const AddContest = () => {
   } = useForm();
 
   const onSubmit = (data) => {
-    console.log(data);
+    
     const contestData = {
       contestName: data.name,
 
@@ -33,6 +33,7 @@ const AddContest = () => {
     };
     console.log(contestData);
     axiosSecure.post("/contests", contestData).then((res) => {
+      
       Swal.fire({
         position: "center",
         icon: "success",

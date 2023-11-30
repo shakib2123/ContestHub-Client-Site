@@ -10,7 +10,7 @@ const ManageContestTable = ({ contest, refetch, index }) => {
   const handleConfirm = (id) => {
     console.log(id);
     axiosSecure.patch(`/contests/${id}`, { status: "Accepted" }).then((res) => {
-      console.log(res.data);
+      
       if (res.data.modifiedCount > 0) {
         Swal.fire({
           title: "Confirmed!",

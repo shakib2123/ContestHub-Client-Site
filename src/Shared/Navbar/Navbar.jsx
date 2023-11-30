@@ -8,7 +8,7 @@ import useSingleUser from "../../hooks/useSingleUser";
 const Navbar = () => {
   const { user, logOut } = useAuth();
   const { userData, isLoading } = useSingleUser();
-  console.log(userData?.role);
+
   const handleLogout = () => {
     logOut()
       .then(() => {

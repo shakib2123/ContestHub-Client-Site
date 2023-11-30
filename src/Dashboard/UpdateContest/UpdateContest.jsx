@@ -25,7 +25,7 @@ const UpdateContest = () => {
       contestType: data.type,
       deadline: data.deadline,
     };
-    console.log(contestData, loadedContest.contestType);
+
 
     axiosSecure
       .put(`/contests/${loadedContest?._id}`, contestData)

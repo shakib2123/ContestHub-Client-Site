@@ -20,7 +20,7 @@ const UserTable = ({ user, index }) => {
         axiosSecure
           .put(`/users/${user?.email}`, { role: selectedRole })
           .then((res) => {
-            console.log(res.data);
+            
             if (res.data.modifiedCount > 0) {
               Swal.fire({
                 title: "Changed!",

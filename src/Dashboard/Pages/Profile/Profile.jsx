@@ -5,8 +5,8 @@ import toast from "react-hot-toast";
 import useSingleUser from "../../../hooks/useSingleUser";
 import AOS from "aos";
 import { useEffect } from "react";
-const Profile = () =>
-{
+import { useNavigate } from "react-router-dom";
+const Profile = () => {
   useEffect(() => {
     AOS.init({
       duration: 1000,
@@ -19,8 +19,8 @@ const Profile = () =>
 
   const { userData } = useSingleUser();
   const data = [
-    { name: "Attempted", value: winningCount?.length||0 },
-    { name: "Win", value: winning?.length ||0},
+    { name: "Attempted", value: winningCount?.length || 0 },
+    { name: "Win", value: winning?.length || 0 },
   ];
   const COLORS = ["#00C49F", "#FF8042"];
   const RADIAN = Math.PI / 180;
@@ -49,19 +49,19 @@ const Profile = () =>
       </text>
     );
   };
-
+  const navigate = useNavigate();
   const handleProfileUpdate = (e) => {
     e.preventDefault();
     const form = e.target;
     const name = form.name.value;
     const photo = form.photo.value;
-    console.log(name, photo);
     profileUpdate(name, photo)
       .then((res) => {
-        console.log(res);
         toast.success("Profile updated successfully!");
+        navigate("/dashboard/profile");
       })
       .catch((error) => {
+        console.log(error.message);
         toast.error(error.message);
       });
   };
@@ -147,7 +147,6 @@ const Profile = () =>
             </div>
             <div className="flex justify-end">
               <button
-             
                 className="bg-gradient-to-r from-purple-600 via-purple-400 to-blue-500 text-white px-4 py-2 font-bold rounded-md hover:opacity-80"
                 type="submit"
               >

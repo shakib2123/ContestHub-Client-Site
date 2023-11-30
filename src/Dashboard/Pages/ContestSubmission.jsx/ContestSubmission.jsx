@@ -15,7 +15,7 @@ const ContestSubmission = () => {
     },
   });
   const handleWinner = (submission) => {
-    console.log(submission);
+    
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -34,12 +34,12 @@ const ContestSubmission = () => {
         axiosSecure
           .put(`/registrations/${submission._id}`, { winner: "winner" })
           .then((res) => {
-            console.log(res.data);
+            
             if (res.data.modifiedCount > 0) {
               axiosSecure
                 .put(`/contests/winner/${submission.contestId}`, winnerData)
                 .then((res) => {
-                  console.log(res.data);
+                 
                   if (res.data.modifiedCount > 0) {
                     Swal.fire({
                       title: "Declared!",

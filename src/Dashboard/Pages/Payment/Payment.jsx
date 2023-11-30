@@ -5,7 +5,7 @@ import CheckoutForm from "./CheckOutForm";
 
 const Payment = () => {
   const loadedContest = useLoaderData();
-  console.log(loadedContest);
+ 
   const stripePromise = loadStripe(import.meta.env.VITE_payment_api);
   return (
     <div>

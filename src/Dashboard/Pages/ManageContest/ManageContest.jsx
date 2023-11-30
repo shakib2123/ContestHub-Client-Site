@@ -3,7 +3,7 @@ import ManageContestTable from "./ManageContestTable";
 
 const ManageContest = () => {
   const { contests, refetch } = useContest();
-  console.log(contests);
+  
 
   return (
     <div className="max-w-7xl mx-auto">

@@ -19,10 +19,10 @@ const SignUp = () => {
   } = useForm();
 
   const onSubmit = (data) => {
-    console.log(data);
+    
     createUser(data.email, data.password)
       .then((res) => {
-        console.log(res);
+        
         profileUpdate(data.name, data.photo).then(() => {
           const userData = {
             name: data.name,

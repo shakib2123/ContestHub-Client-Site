@@ -6,7 +6,7 @@ import Timer from "../../../components/Timer/Timer";
 
 const ContestDetails = () => {
   const contest = useLoaderData();
-  console.log(contest.deadline);
+  
   const [dateString, setDateString] = useState(contest.deadline);
   const [totalDays, setTotalDays] = useState(0);
 

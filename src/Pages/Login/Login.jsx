@@ -16,11 +16,11 @@ const Login = () => {
   } = useForm();
 
   const onSubmit = (data) => {
-    console.log(data);
+
 
     logIn(data.email, data.password)
       .then((res) => {
-        console.log(res);
+    
         toast.success("Login successfully!");
         navigate(
           location?.state?.from?.pathname

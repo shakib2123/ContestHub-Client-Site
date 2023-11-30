@@ -90,10 +90,10 @@ const CheckoutForm = ({ loadedContest }) => {
           status: "pending",
           task: task,
         };
-        console.log(registration);
+        
 
         const res = await axiosSecure.post("/registrations", registration);
-        console.log(res.data);
+      
         if (res?.data) {
           axiosSecure
             .put(`/contests/attendance/${loadedContest._id}`, {
