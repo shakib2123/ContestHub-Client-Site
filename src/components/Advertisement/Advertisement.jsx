@@ -36,7 +36,7 @@ const Advertisement = () => {
         </p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 overflow-auto ">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8  ">
         {winners.map((winner) => (
           <div
             key={winner._id}

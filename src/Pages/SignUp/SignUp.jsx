@@ -31,7 +31,7 @@ const SignUp = () => {
           };
           axiosSecure.post("/users", userData).then((res) => {
             console.log(res.data);
-            if (res.data.insertedId) {
+            if (res.data) {
               toast.success("sign up successfully!");
               navigate(
                 location?.state?.from?.pathname

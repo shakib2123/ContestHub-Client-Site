@@ -84,16 +84,17 @@ const CheckoutForm = ({ loadedContest }) => {
           creatorName: loadedContest.creatorName,
           contestId: loadedContest._id,
           transactionId: paymentIntent.id,
-          contestImage: loadedContest.image,
+          contestImage: loadedContest?.image,
           deadline: loadedContest.deadline,
           date: new Date(),
           status: "pending",
           task: task,
         };
+        console.log(registration);
 
         const res = await axiosSecure.post("/registrations", registration);
-
-        if (res.data?.insertedId) {
+        console.log(res.data);
+        if (res?.data) {
           axiosSecure
             .put(`/contests/attendance/${loadedContest._id}`, {
               attendance: loadedContest.attendance + 1,

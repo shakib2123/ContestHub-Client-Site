@@ -4,13 +4,12 @@ import { useEffect } from "react";
 import { Navigate } from "react-router-dom";
 
 const axiosSecure = axios.create({
-  baseURL: "http://localhost:5000",
+  baseURL: "https://contest-hub-server-site.vercel.app",
 });
 const useAxios = () => {
-  // const navigate = useNavigate();
   const { logOut } = useAuth() || {};
 
-  axiosSecure.interceptors.request.use(
+  axiosSecure?.interceptors?.request.use(
     function (config) {
       const token = localStorage.getItem("access-token");
       config.headers.authorization = token;
@@ -21,15 +20,17 @@ const useAxios = () => {
     }
   );
 
-  // intercepts 401 and 403 status
   useEffect(() => {
-    axiosSecure.interceptors.response.use(
+    axiosSecure?.interceptors?.response.use(
       (res) => {
         return res;
       },
       (error) => {
         console.log("error in fetch", error.response);
-        if (error.response.status === 401 || error.response.status === 403) {
+        if (
+          error?.response?.status === 401 ||
+          error?.response?.status === 403
+        ) {
           logOut()
             .then(() => {
               <Navigate to="/login"></Navigate>;

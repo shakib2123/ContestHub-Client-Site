@@ -42,7 +42,9 @@ const Router = createBrowserRouter([
         path: "contestDetails/:id",
         element: <ContestDetails></ContestDetails>,
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/contests/${params.id}`),
+          fetch(
+            `https://contest-hub-server-site.vercel.app/contests/${params.id}`
+          ),
       },
       {
         path: "payment/:id",
@@ -52,7 +54,9 @@ const Router = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/contests/${params.id}`),
+          fetch(
+            `https://contest-hub-server-site.vercel.app/contests/${params.id}`
+          ),
       },
       {
         path: "leaderBoard",
@@ -123,9 +127,7 @@ const Router = createBrowserRouter([
         path: "myContest",
         element: (
           <PrivateRoute>
-            <Creator>
-              <MyContest></MyContest>
-            </Creator>
+            <MyContest></MyContest>
           </PrivateRoute>
         ),
       },
@@ -133,13 +135,13 @@ const Router = createBrowserRouter([
         path: "updateContest/:id",
         element: (
           <PrivateRoute>
-            <Creator>
-              <UpdateContest />
-            </Creator>
+            <UpdateContest />
           </PrivateRoute>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/contests/${params.id}`),
+          fetch(
+            `https://contest-hub-server-site.vercel.app/contests/${params.id}`
+          ),
       },
       {
         path: "submittedContest",

@@ -54,7 +54,7 @@ const UpdateContest = () => {
               <input
                 {...register("name", { required: true })}
                 type="text"
-                defaultValue={loadedContest.contestName}
+                defaultValue={loadedContest?.contestName}
                 placeholder="Contest name"
                 className="input input-bordered"
               />
@@ -87,7 +87,7 @@ const UpdateContest = () => {
               </label>
               <input
                 {...register("price", { required: true })}
-                defaultValue={loadedContest.price}
+                defaultValue={loadedContest?.price}
                 type="number"
                 placeholder="price"
                 className="input input-bordered"
@@ -102,7 +102,7 @@ const UpdateContest = () => {
               </label>
               <input
                 {...register("prize", { required: true })}
-                defaultValue={loadedContest.prize}
+                defaultValue={loadedContest?.prize}
                 type="number"
                 placeholder="Prize Money"
                 className="input input-bordered"
@@ -117,7 +117,7 @@ const UpdateContest = () => {
               </label>
               <input
                 {...register("deadline", { required: true })}
-                defaultValue={loadedContest.deadline}
+                defaultValue={loadedContest?.deadline}
                 type="date"
                 placeholder="Contest Deadline"
                 className="input input-bordered"
@@ -134,7 +134,7 @@ const UpdateContest = () => {
               </label>
               <input
                 {...register("instruction", { required: true })}
-                defaultValue={loadedContest.instruction}
+                defaultValue={loadedContest?.instruction}
                 type="text"
                 placeholder="Task Submission instruction"
                 className="input input-bordered"
@@ -152,7 +152,7 @@ const UpdateContest = () => {
               </label>
               <input
                 {...register("image", { required: true })}
-                defaultValue={loadedContest.image}
+                defaultValue={loadedContest?.image}
                 type="text"
                 placeholder="Image"
                 className="input input-bordered"
@@ -167,7 +167,7 @@ const UpdateContest = () => {
               </label>
               <textarea
                 {...register("description", { required: true })}
-                defaultValue={loadedContest.description}
+                defaultValue={loadedContest?.description}
                 className="textarea textarea-bordered"
                 placeholder="Contest Description"
               ></textarea>

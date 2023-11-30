@@ -33,7 +33,6 @@ const AddContest = () => {
     };
     console.log(contestData);
     axiosSecure.post("/contests", contestData).then((res) => {
-      console.log(res.data);
       Swal.fire({
         position: "center",
         icon: "success",
